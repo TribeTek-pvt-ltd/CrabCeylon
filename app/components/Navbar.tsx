@@ -73,7 +73,7 @@ export default function Navbar({
               <span className="font-serif text-2xl sm:text-3xl font-normal tracking-[0.24em] text-white group-hover:text-[#f4df95] transition-colors">
                 CRAB CEYLON
               </span>
-              <span className="text-[9px] uppercase tracking-[0.38em] text-[#c5a059] font-medium mt-0.5">
+              <span className="text-[9px] uppercase tracking-[0.38em] text-[#D4AF37] font-medium mt-0.5">
                 Yorkville • Toronto
               </span>
             </a>

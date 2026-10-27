@@ -19,7 +19,7 @@ export default function Hero({ onOrderClick, onReserveClick }: HeroProps) {
           alt="Wild Ceylon Lagoon Mud Crab at Crab Ceylon Toronto"
           fill
           priority
-          className="object-cover object-center filter brightness-[0.42] contrast-[1.18]"
+          className="object-cover object-center filter brightness-[1] contrast-[1.20]"
         />
         {/* Layered cinematic gradients */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#07090e] via-[#07090e]/50 to-[#07090e]/75" />
@@ -27,11 +27,11 @@ export default function Hero({ onOrderClick, onReserveClick }: HeroProps) {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center ">
         {/* Understated Location & Sourcing Tag */}
         <div className="inline-flex items-center gap-3 mb-8">
           <span className="w-8 h-[1px] bg-[#c5a059]/60" />
-          <span className="text-[11px] uppercase tracking-[0.35em] text-[#c5a059] font-medium">
+          <span className="text-[11px] uppercase tracking-[0.35em] text-[#D4AF37] font-medium">
             Yorkville • Toronto • Est. 2024
           </span>
           <span className="w-8 h-[1px] bg-[#c5a059]/60" />
@@ -41,7 +41,7 @@ export default function Hero({ onOrderClick, onReserveClick }: HeroProps) {
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal text-white leading-[1.15] mb-8 tracking-tight">
           Wild Ceylon Lagoon Crabs.
           <br />
-          <span className="italic font-normal text-[#f4df95]">
+          <span className="italic font-bold text-[#D4AF37]">
             Pure Oceanic Luxury in Toronto.
           </span>
         </h1>
