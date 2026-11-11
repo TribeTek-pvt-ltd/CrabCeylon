@@ -1,134 +1,559 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #060910;
-  --bg-secondary: #0b111c;
-  --bg-card: rgba(15, 23, 38, 0.7);
-  --bg-card-hover: rgba(22, 33, 54, 0.85);
-  
-  --gold-primary: #d4af37;
-  --gold-light: #f5df88;
-  --gold-dark: #997a15;
-  --gold-glow: rgba(212, 175, 55, 0.25);
-  
-  --crab-red: #e04b2b;
-  --crab-ember: #ff6842;
-  
-  --text-primary: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  
-  --border-gold: rgba(212, 175, 55, 0.22);
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --bg-primary: #faf8f5;
+  --bg-secondary: #f4efe6;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+
+  --gold-primary: #c5a059;
+  --gold-light: #dfc285;
+  --gold-dark: #8c6314;
+  --gold-glow: rgba(197, 160, 89, 0.25);
+
+  --crab-red: #d33c1d;
+  --crab-ember: #ea580c;
+
+  --text-primary: #121826;
+  --text-muted: #4b5563;
+  --text-dim: #71717a;
+
+  --border-gold: rgba(197, 160, 89, 0.28);
+  --border-subtle: rgba(0, 0, 0, 0.08);
 }
 
-html, body {
+html,
+body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
   selection-background-color: var(--gold-primary);
-  selection-color: #000;
-  cursor: url('/cursors/crab.png') 4 4, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E%F0%9F%A6%80%3C/text%3E%3C/svg%3E") 4 4, auto;
+  selection-color: #ffffff;
 }
 
-/* Luxury crab pointer for interactive elements */
-a, button, [role="button"], .cursor-pointer, select {
-  cursor: url('/cursors/crab-pointer.png') 4 4, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A6%80%3C/text%3E%3C/svg%3E") 4 4, pointer !important;
+/* Didone Editorial font matching Ministry of Crab typography */
+.font-didone {
+  font-family: 'Bodoni Moda', 'Playfair Display', Didot, 'Prata', serif;
+  font-feature-settings: "liga" 1, "dlig" 1;
 }
 
-/* Ensure typing inputs remain easy to use */
-input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
-  cursor: text !important;
-}
-
-h1, h2, h3, .font-serif {
-  font-family: 'Playfair Display', Georgia, serif;
+h1,
+h2,
+h3,
+.font-serif {
+  font-family: 'Playfair Display', 'Bodoni Moda', Georgia, serif;
 }
 
 .font-brand {
   font-family: 'Cinzel', serif;
 }
 
-/* Glassmorphism surfaces */
+.font-manrope {
+  font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Luxury Light Glassmorphism surfaces */
 .glass-panel {
-  background: rgba(12, 18, 30, 0.72);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-gold);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(17, 26, 44, 0.8) 0%, rgba(10, 16, 28, 0.85) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.16);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.45);
-  box-shadow: 0 12px 35px -8px rgba(212, 175, 55, 0.12), 0 0 20px -2px rgba(224, 75, 43, 0.1);
-  transform: translateY(-3px);
+  border-color: rgba(197, 160, 89, 0.6);
+  box-shadow: 0 20px 45px -10px rgba(197, 160, 89, 0.22), 0 0 20px -3px rgba(211, 60, 29, 0.08);
+  transform: translateY(-4px);
 }
 
-/* Gold Gradient Accents */
+/* Rich Gold & Ember Gradients for Light Mode */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #fff3c4 0%, #d4af37 50%, #aa8418 100%);
+  background: linear-gradient(135deg, #875c12 0%, #c5a059 45%, #946917 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-ember-gradient {
-  background: linear-gradient(135deg, #ff9478 0%, #e04b2b 60%, #b82a0d 100%);
+  background: linear-gradient(135deg, #b91c1c 0%, #d33c1d 60%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .bg-gold-gradient {
-  background: linear-gradient(135deg, #f5df88 0%, #d4af37 60%, #997a15 100%);
+  background: linear-gradient(135deg, #e4c580 0%, #c5a059 55%, #a67c24 100%);
 }
 
 .bg-ember-gradient {
-  background: linear-gradient(135deg, #ff6842 0%, #e04b2b 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
 }
 
-/* Custom Scrollbar */
+/* Custom Refined Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #060910;
+  background: #faf8f5;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #25334d;
+  background: #d8ceb8;
   border-radius: 9999px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(197, 160, 89, 0.2);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: #c5a059;
 }
 
-/* Subtle Shimmer & Pulse Animations */
-@keyframes goldPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.45), inset 0 0 20px rgba(212, 175, 55, 0.2);
-  }
-}
-
-.animate-gold-pulse {
-  animation: goldPulse 3.5s infinite ease-in-out;
-}
-
+/* Creative Keyframe Animations */
 @keyframes floatSlow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
+  }
 }
 
 .animate-float {
   animation: floatSlow 5s ease-in-out infinite;
+}
+
+@keyframes floatReverse {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(8px) rotate(-0.5deg);
+  }
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: shimmerSlide 3.5s infinite;
+}
+
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scale(1.3);
+  }
+}
+
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1.02);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 20s ease-in-out infinite alternate;
+}
+
+.animate-steam {
+  animation: steamRise 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(197, 160, 89, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+  }
+}
+
+.animate-radar-ping {
+  animation: radarPing 2.5s infinite;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes causticWave {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.bg-caustic-ambient {
+  background: radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.12) 0%, rgba(250, 248, 245, 0) 70%),
+    radial-gradient(circle at 80% 60%, rgba(211, 60, 29, 0.05) 0%, rgba(250, 248, 245, 0) 60%),
+    radial-gradient(circle at 20% 80%, rgba(197, 160, 89, 0.08) 0%, rgba(250, 248, 245, 0) 50%);
+}
+
+
+/* ==========================================
+   CRAB CEYLON — PREMIUM ANIMATION SYSTEM
+========================================== */
+
+/* Hero crab entrance */
+@keyframes crabEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(100px, 35px, 0) scale(0.82) rotate(8deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate3d(-8px, -5px, 0) scale(1.02) rotate(-2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0);
+  }
+}
+
+.animate-crab-entrance {
+  animation: crabEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Floating crab idle */
+@keyframes crabIdle {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+}
+
+.animate-crab-idle {
+  animation: crabIdle 5s ease-in-out infinite;
+}
+
+/* Golden underwater particles */
+@keyframes oceanParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.6);
+  }
+
+  25% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.2);
+  }
+}
+
+.ocean-particle {
+  animation: oceanParticle 5s ease-in-out infinite;
+}
+
+/* Luxury text reveal */
+@keyframes luxuryReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-luxury-reveal {
+  animation: luxuryReveal 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Gold light sweep */
+@keyframes goldSweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+.gold-light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-light-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(197, 160, 89, 0.18),
+      transparent);
+  animation: goldSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-crab-entrance,
+  .animate-crab-idle,
+  .ocean-particle,
+  .animate-luxury-reveal,
+  .gold-light-sweep {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================
+   CRAB CEYLON — CINEMATIC HERO ANIMATIONS
+========================================== */
+
+/* Crab emblem entrance */
+@keyframes emblemReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.7) rotate(-12deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.08) rotate(3deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+.hero-emblem {
+  animation: emblemReveal 1.1s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+/* Gentle crab emblem movement */
+@keyframes emblemFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.hero-emblem-float {
+  animation: emblemFloat 4s ease-in-out infinite;
+}
+
+/* Text entrance */
+@keyframes heroTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-text-reveal {
+  animation: heroTextReveal 0.9s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.hero-delay-1 {
+  animation-delay: 0.15s;
+}
+
+.hero-delay-2 {
+  animation-delay: 0.30s;
+}
+
+.hero-delay-3 {
+  animation-delay: 0.45s;
+}
+
+.hero-delay-4 {
+  animation-delay: 0.60s;
+}
+
+.hero-delay-5 {
+  animation-delay: 0.75s;
+}
+
+/* Floating golden particles */
+@keyframes heroParticleFloat {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 25px, 0) scale(.5);
+  }
+
+  20% {
+    opacity: .7;
+  }
+
+  80% {
+    opacity: .4;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(20px, -110px, 0) scale(1.2);
+  }
+}
+
+.hero-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f1b01d;
+  box-shadow: 0 0 12px rgba(241, 176, 29, .7);
+  pointer-events: none;
+  animation: heroParticleFloat 7s ease-in-out infinite;
+}
+
+/* Gold glow behind crab emblem */
+.hero-gold-glow {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse,
+      rgba(241, 176, 29, .2),
+      transparent 70%);
+  filter: blur(15px);
+  pointer-events: none;
+}
+
+/* Slow cinematic background */
+.hero-media {
+  animation: subtleZoom 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-emblem,
+  .hero-emblem-float,
+  .hero-text-reveal,
+  .hero-particle,
+  .hero-media {
+    animation: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
 }

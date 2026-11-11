@@ -42,31 +42,31 @@ export default function OrderSearchModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-[#0a0f19] border border-[#c5a059]/35 rounded-2xl p-6 sm:p-8 text-slate-100 shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md bg-white border border-[#c5a059]/40 rounded-2xl p-6 sm:p-8 text-[#121826] shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white"
+          className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-800 cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/30 flex items-center justify-center mx-auto mb-3">
-            <Compass className="w-5 h-5 text-[#c5a059]" />
+          <div className="w-12 h-12 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/30 flex items-center justify-center mx-auto mb-3 text-[#99752b]">
+            <Compass className="w-5 h-5" />
           </div>
-          <h3 className="font-serif text-xl sm:text-2xl text-white font-normal">
+          <h3 className="font-didone text-2xl text-[#121826] font-bold">
             Track Your Order
           </h3>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-stone-600 mt-1 font-light leading-relaxed">
             Enter your Crab Ceylon order confirmation number to view live kitchen preparation and heated courier dispatch.
           </p>
         </div>
 
-        <form onSubmit={handleSearch} className="space-y-4">
+        <form onSubmit={handleSearch} className="space-y-4 text-left">
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.25em] text-[#c5a059] font-medium mb-1.5">
+            <label className="block text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold mb-1.5">
               Order ID / Number
             </label>
             <div className="relative">
@@ -78,18 +78,18 @@ export default function OrderSearchModal({
                   setOrderQuery(e.target.value);
                   setErrorMessage('');
                 }}
-                className="w-full px-4 py-3 bg-[#111726] border border-white/10 rounded-xl text-white font-mono text-sm focus:outline-none focus:border-[#c5a059] transition-colors uppercase tracking-wider"
+                className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 font-mono text-sm focus:outline-none focus:border-[#c5a059] transition-colors uppercase tracking-wider shadow-2xs"
                 autoFocus
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#c5a059] hover:bg-[#d4af37] text-[#07090e] font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer shadow-xs"
               >
                 Track
               </button>
             </div>
             {errorMessage && (
-              <p className="text-xs text-red-400 mt-2 flex items-center gap-1">
+              <p className="text-xs text-red-500 mt-2 flex items-center gap-1 font-medium">
                 <AlertCircle className="w-3.5 h-3.5" />
                 {errorMessage}
               </p>
@@ -97,33 +97,33 @@ export default function OrderSearchModal({
           </div>
 
           {/* Sample quick picks */}
-          <div className="pt-2 border-t border-white/[0.08]">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 block mb-2">
+          <div className="pt-2 border-t border-stone-200">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-stone-500 block mb-2 font-medium">
               Recent Demonstrative Orders:
             </span>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => handleSelectSample('CC-8429')}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-[#0e1422] border border-white/5 hover:border-[#c5a059]/40 text-left text-xs transition-colors"
+                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#c5a059] text-left text-xs transition-all cursor-pointer shadow-2xs group"
               >
                 <div>
-                  <span className="font-mono font-bold text-amber-200">#CC-8429</span>
-                  <span className="text-slate-400 block text-[11px]">Downtown Toronto Penthouse • In Wok</span>
+                  <span className="font-mono font-bold text-[#99752b]">#CC-8429</span>
+                  <span className="text-stone-500 block text-[11px] font-light">Downtown Toronto Penthouse • In Wok</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#99752b] group-hover:translate-x-0.5 transition-all" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleSelectSample('CC-9104')}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-[#0e1422] border border-white/5 hover:border-[#c5a059]/40 text-left text-xs transition-colors"
+                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#c5a059] text-left text-xs transition-all cursor-pointer shadow-2xs group"
               >
                 <div>
-                  <span className="font-mono font-bold text-amber-200">#CC-9104</span>
-                  <span className="text-slate-400 block text-[11px]">Yorkville Garden Table #12 • Selecting Catch</span>
+                  <span className="font-mono font-bold text-[#99752b]">#CC-9104</span>
+                  <span className="text-stone-500 block text-[11px] font-light">Yorkville Garden Table #12 • Selecting Catch</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#99752b] group-hover:translate-x-0.5 transition-all" />
               </button>
             </div>
           </div>

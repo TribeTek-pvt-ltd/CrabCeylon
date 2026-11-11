@@ -86,25 +86,26 @@ export default function CartDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#090d16] border-l border-[#c5a059]/30 shadow-2xl flex flex-col justify-between text-slate-100">
+        <div className="w-screen max-w-md bg-white border-l border-[#c5a059]/40 shadow-2xl flex flex-col justify-between text-[#121826]">
+          
           {/* Header */}
-          <div className="p-6 border-b border-white/[0.08] flex items-center justify-between bg-[#070a10]">
+          <div className="p-6 border-b border-stone-200 flex items-center justify-between bg-[#faf8f5]">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/30 flex items-center justify-center text-[#c5a059]">
+              <div className="w-10 h-10 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/40 flex items-center justify-center text-[#99752b]">
                 <ShoppingBag className="w-4 h-4 stroke-[2]" />
               </div>
-              <div>
-                <h3 className="font-serif text-lg text-white font-normal">Order Bag</h3>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a059] font-medium">
+              <div className="text-left">
+                <h3 className="font-didone text-xl text-[#121826] font-bold">Order Bag</h3>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#99752b] font-semibold">
                   {cartItems.length} {cartItems.length === 1 ? 'Curated Dish' : 'Curated Dishes'}
                 </span>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-white transition-colors"
+              className="p-2 text-stone-400 hover:text-stone-800 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -112,72 +113,73 @@ export default function CartDrawer({
 
           {/* Body Content */}
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            
             {/* Delivery / Dining Mode Switcher */}
-            <div className="grid grid-cols-3 gap-1 p-1 bg-[#101625] border border-white/[0.08] text-[11px] uppercase tracking-[0.15em] font-medium">
+            <div className="grid grid-cols-3 gap-1 p-1 bg-stone-100 rounded-lg text-[11px] uppercase tracking-[0.15em] font-semibold border border-stone-200">
               <button
                 type="button"
                 onClick={() => setDeliveryType('express')}
-                className={`py-2 px-1 transition-all ${
+                className={`py-2 px-1 rounded transition-all cursor-pointer ${
                   deliveryType === 'express'
-                    ? 'bg-[#c5a059] text-[#07090e] font-semibold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-[#121826] shadow-xs'
+                    : 'text-stone-500 hover:text-stone-800'
                 }`}
               >
-                Heated Delivery
+                Delivery
               </button>
               <button
                 type="button"
                 onClick={() => setDeliveryType('dinein')}
-                className={`py-2 px-1 transition-all ${
+                className={`py-2 px-1 rounded transition-all cursor-pointer ${
                   deliveryType === 'dinein'
-                    ? 'bg-[#c5a059] text-[#07090e] font-semibold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-[#121826] shadow-xs'
+                    : 'text-stone-500 hover:text-stone-800'
                 }`}
               >
-                Table Dine-In
+                Dine-In
               </button>
               <button
                 type="button"
                 onClick={() => setDeliveryType('pickup')}
-                className={`py-2 px-1 transition-all ${
+                className={`py-2 px-1 rounded transition-all cursor-pointer ${
                   deliveryType === 'pickup'
-                    ? 'bg-[#c5a059] text-[#07090e] font-semibold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-[#121826] shadow-xs'
+                    : 'text-stone-500 hover:text-stone-800'
                 }`}
               >
-                Yorkville Curbside
+                Curbside
               </button>
             </div>
 
             {/* Address / Table Input */}
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-xs text-left">
               {deliveryType === 'express' ? (
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.25em] text-slate-400 font-medium mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.25em] text-stone-500 font-bold mb-1.5">
                     Delivery Address (Toronto & GTA)
                   </label>
                   <input
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-[#101625] border border-white/10 text-white text-xs focus:border-[#c5a059] outline-none"
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none focus:ring-1 focus:ring-[#c5a059]"
                     placeholder="Enter Toronto address..."
                   />
                 </div>
               ) : deliveryType === 'dinein' ? (
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.25em] text-slate-400 font-medium mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.25em] text-stone-500 font-bold mb-1.5">
                     Table & Dining Area
                   </label>
                   <input
                     type="text"
                     value={tableNumber}
                     onChange={(e) => setTableNumber(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-[#101625] border border-white/10 text-white text-xs focus:border-[#c5a059] outline-none"
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none focus:ring-1 focus:ring-[#c5a059]"
                   />
                 </div>
               ) : (
-                <div className="p-3 bg-[#101625] border border-white/10 text-slate-300 text-xs">
+                <div className="p-3 bg-stone-50 border border-stone-200 rounded-lg text-stone-600 text-xs">
                   Pick up at 124 Yorkville Avenue, Toronto, ON M5R 1C2.
                 </div>
               )}
@@ -185,48 +187,48 @@ export default function CartDrawer({
               {/* Customer Contact */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium mb-1">
+                  <label className="block text-[10px] uppercase tracking-[0.2em] text-stone-500 font-bold mb-1">
                     Name
                   </label>
                   <input
                     type="text"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full px-3 py-2 bg-[#101625] border border-white/10 text-white text-xs focus:border-[#c5a059] outline-none"
+                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium mb-1">
+                  <label className="block text-[10px] uppercase tracking-[0.2em] text-stone-500 font-bold mb-1">
                     Phone
                   </label>
                   <input
                     type="text"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
-                    className="w-full px-3 py-2 bg-[#101625] border border-white/10 text-white text-xs focus:border-[#c5a059] outline-none"
+                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none"
                   />
                 </div>
               </div>
             </div>
 
             {/* Cart Items List */}
-            <div className="space-y-3">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#c5a059] font-medium block">
+            <div className="space-y-3 text-left">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold block">
                 Selected Catches
               </span>
 
               {cartItems.length === 0 ? (
-                <div className="text-center py-10 border border-white/[0.08] bg-[#0c111e]">
-                  <p className="text-slate-300 text-sm">Your order bag is currently empty.</p>
-                  <p className="text-slate-500 text-xs mt-1">Explore our wild Ceylon lagoon crabs to begin.</p>
+                <div className="text-center py-10 border border-stone-200 bg-stone-50 rounded-xl">
+                  <p className="text-stone-700 text-sm font-medium">Your order bag is currently empty.</p>
+                  <p className="text-stone-400 text-xs mt-1">Explore our wild Ceylon lagoon crabs to begin.</p>
                 </div>
               ) : (
                 cartItems.map((item) => (
                   <div
                     key={item.cartId}
-                    className="p-3.5 bg-[#0e1320] border border-white/[0.07] flex gap-3 text-left"
+                    className="p-3.5 bg-white border border-stone-200 rounded-xl flex gap-3 text-left shadow-2xs"
                   >
-                    <div className="relative w-16 h-16 flex-shrink-0">
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100">
                       <Image
                         src={item.item.image}
                         alt={item.item.title}
@@ -237,20 +239,20 @@ export default function CartDrawer({
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-1">
-                        <h4 className="font-serif text-sm text-white truncate font-normal">
+                        <h4 className="font-serif text-sm text-[#121826] font-semibold truncate">
                           {item.item.title}
                         </h4>
                         <button
                           onClick={() => onRemoveItem(item.cartId)}
-                          className="text-slate-500 hover:text-red-400 transition-colors p-1"
+                          className="text-stone-400 hover:text-red-500 transition-colors p-1 cursor-pointer"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
-                      <div className="text-[11px] text-slate-400 space-y-0.5 mt-0.5">
+                      <div className="text-[11px] text-stone-500 space-y-0.5 mt-0.5">
                         {item.selectedSize && (
-                          <div className="text-[#f4df95]">
+                          <div className="text-[#99752b] font-medium">
                             {item.selectedSize.name} (~{item.selectedSize.weight})
                           </div>
                         )}
@@ -259,24 +261,24 @@ export default function CartDrawer({
                         )}
                       </div>
 
-                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/[0.06]">
-                        <span className="font-mono text-sm text-[#f4df95]">
+                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-stone-100">
+                        <span className="font-mono text-sm text-[#99752b] font-bold">
                           ${item.itemTotalPrice.toFixed(2)} CAD
                         </span>
 
-                        <div className="flex items-center gap-2 bg-[#070a10] border border-white/10 px-2 py-0.5">
+                        <div className="flex items-center gap-2 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">
                           <button
                             onClick={() => onUpdateQuantity(item.cartId, item.quantity - 1)}
-                            className="text-slate-400 hover:text-white p-0.5"
+                            className="text-stone-500 hover:text-stone-900 p-0.5 cursor-pointer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="font-mono text-xs text-white">
+                          <span className="font-mono text-xs text-stone-900 font-semibold">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => onUpdateQuantity(item.cartId, item.quantity + 1)}
-                            className="text-slate-400 hover:text-white p-0.5"
+                            className="text-stone-500 hover:text-stone-900 p-0.5 cursor-pointer"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -290,27 +292,27 @@ export default function CartDrawer({
 
             {/* Promo Code Input */}
             {cartItems.length > 0 && (
-              <div className="pt-2">
+              <div className="pt-2 text-left">
                 <div className="flex gap-2">
                   <div className="relative flex-1">
-                    <Tag className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Tag className="w-3.5 h-3.5 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       placeholder="Privilege code (e.g. CRABVIP)"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      className="w-full pl-8 pr-3 py-2 bg-[#101625] border border-white/10 text-xs text-white placeholder-slate-500 uppercase focus:border-[#c5a059] outline-none"
+                      className="w-full pl-8 pr-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-800 placeholder-stone-400 uppercase focus:border-[#c5a059] outline-none"
                     />
                   </div>
                   <button
                     onClick={applyPromo}
-                    className="px-4 py-2 border border-[#c5a059]/40 text-[#f4df95] hover:bg-[#c5a059] hover:text-[#07090e] text-xs font-semibold uppercase tracking-wider transition-all"
+                    className="px-4 py-2 bg-stone-100 border border-[#c5a059] text-[#99752b] hover:bg-[#c5a059] hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-all cursor-pointer"
                   >
                     Apply
                   </button>
                 </div>
                 {promoSuccessMsg && (
-                  <p className={`text-[11px] mt-1.5 flex items-center gap-1 ${discountPercent > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <p className={`text-[11px] mt-1.5 flex items-center gap-1 ${discountPercent > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                     <Check className="w-3 h-3" />
                     {promoSuccessMsg}
                   </p>
@@ -321,30 +323,30 @@ export default function CartDrawer({
 
           {/* Checkout Footer */}
           {cartItems.length > 0 && (
-            <div className="p-6 border-t border-white/[0.08] bg-[#070a10] space-y-3">
-              <div className="space-y-1.5 text-xs text-slate-400">
+            <div className="p-6 border-t border-stone-200 bg-[#faf8f5] space-y-3 text-left">
+              <div className="space-y-1.5 text-xs text-stone-600">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="text-white font-mono">${subtotal.toFixed(2)} CAD</span>
+                  <span className="text-[#121826] font-mono font-semibold">${subtotal.toFixed(2)} CAD</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="flex items-center gap-1">
-                    <Truck className="w-3 h-3 text-[#c5a059]" />
+                    <Truck className="w-3 h-3 text-[#99752b]" />
                     Thermal Heated Courier
                   </span>
-                  <span className="text-white font-mono">
-                    {deliveryFee === 0 ? <span className="text-emerald-400">Complimentary</span> : `$${deliveryFee.toFixed(2)} CAD`}
+                  <span className="text-[#121826] font-mono font-semibold">
+                    {deliveryFee === 0 ? <span className="text-emerald-600 font-bold">Complimentary</span> : `$${deliveryFee.toFixed(2)} CAD`}
                   </span>
                 </div>
                 {discountAmount > 0 && (
-                  <div className="flex justify-between text-emerald-400">
+                  <div className="flex justify-between text-emerald-600 font-medium">
                     <span>VIP Privilege (15%)</span>
                     <span className="font-mono">-${discountAmount.toFixed(2)} CAD</span>
                   </div>
                 )}
-                <div className="flex justify-between text-base font-normal text-white pt-2 border-t border-white/[0.08]">
+                <div className="flex justify-between text-base font-bold text-[#121826] pt-2 border-t border-stone-200">
                   <span className="font-serif">Total</span>
-                  <span className="font-mono text-[#f4df95] text-xl font-semibold">
+                  <span className="font-mono text-[#99752b] text-xl font-black">
                     ${grandTotal.toFixed(2)} CAD
                   </span>
                 </div>
@@ -353,20 +355,20 @@ export default function CartDrawer({
               <button
                 onClick={handleCheckout}
                 disabled={isSubmitting}
-                className="w-full py-4 bg-[#c5a059] hover:bg-[#d4af37] text-[#07090e] font-semibold text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(197,160,89,0.25)]"
+                className="w-full py-4 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-lg"
               >
                 {isSubmitting ? (
                   <span>Securing Live Lagoon Catch...</span>
                 ) : (
                   <>
                     <span>Confirm Order & Track Live</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
 
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-500 uppercase tracking-widest pt-1">
-                <ShieldCheck className="w-3 h-3 text-[#c5a059]" />
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-stone-500 uppercase tracking-widest pt-1">
+                <ShieldCheck className="w-3 h-3 text-[#99752b]" />
                 <span>Certified Live Saline Weighing Guarantee</span>
               </div>
             </div>

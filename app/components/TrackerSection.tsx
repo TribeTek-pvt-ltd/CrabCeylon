@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Compass, CheckCircle2, Scale, ChefHat, Truck, Utensils, RefreshCw, MapPin, Sparkles, ArrowRight } from 'lucide-react';
-import { OrderTrackingInfo, OrderStatus, INITIAL_ORDERS } from '../data/restaurantData';
+import { OrderTrackingInfo, OrderStatus } from '../data/restaurantData';
 
 interface TrackerSectionProps {
   currentOrder: OrderTrackingInfo;
@@ -31,22 +31,19 @@ export default function TrackerSection({
   };
 
   return (
-    <section id="tracker-section" className="py-20 relative bg-[#080d17] border-y border-[#d4af37]/20 text-slate-100 overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#132038]/50 via-transparent to-transparent pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="tracker-section" className="py-20 relative bg-white border-y border-stone-200 text-[#121826] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#10192b] border border-[#d4af37]/30 text-xs font-semibold text-amber-300 uppercase tracking-widest mb-3">
-              <Compass className="w-3.5 h-3.5 text-[#e04b2b]" />
+          <div className="text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-stone-100 border border-[#c5a059]/40 text-xs font-semibold text-[#99752b] uppercase tracking-widest mb-3">
+              <Compass className="w-3.5 h-3.5 text-[#d33c1d]" />
               Patron Live Service
             </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white tracking-tight">
+            <h2 className="font-didone text-3xl sm:text-4xl font-extrabold text-[#121826] tracking-tight">
               Real-Time <span className="text-gold-gradient">Lagoon-to-Table</span> Radar
             </h2>
-            <p className="text-slate-400 text-sm mt-2 max-w-xl">
+            <p className="text-stone-600 text-sm mt-2 max-w-xl font-light">
               Track your colossal mud crab in real time as our master chefs select it live from the tank, sizzle it in high-heat woks, and dispatch it in heated thermal seal.
             </p>
           </div>
@@ -54,14 +51,14 @@ export default function TrackerSection({
           <div className="flex items-center gap-3">
             <button
               onClick={handleAdvance}
-              className="px-4 py-2.5 rounded-full bg-[#15233b] border border-[#d4af37]/40 text-amber-200 hover:bg-[#d4af37] hover:text-[#060910] text-xs font-bold transition-all flex items-center gap-2 shadow"
+              className="px-4 py-2.5 rounded-lg bg-stone-100 border border-[#c5a059]/40 text-[#99752b] hover:bg-[#c5a059] hover:text-white text-xs font-bold transition-all flex items-center gap-2 shadow-xs cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Simulate Next Stage</span>
             </button>
             <button
               onClick={onOpenFullModal}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#aa8418] text-[#060910] text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+              className="px-5 py-2.5 rounded-lg bg-[#c5a059] hover:bg-[#b58e42] text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer"
             >
               <span>Full Live Map Radar</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5]" />
@@ -70,34 +67,34 @@ export default function TrackerSection({
         </div>
 
         {/* Live Tracking Card */}
-        <div className="glass-card rounded-3xl p-6 sm:p-8 border border-[#d4af37]/30 shadow-2xl">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#132035] border border-[#d4af37]/40 flex items-center justify-center text-2xl shadow-inner">
+        <div className="glass-card rounded-2xl p-6 sm:p-8 border border-[#c5a059]/35 shadow-lg bg-white">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-stone-200">
+            <div className="flex items-center gap-4 text-left">
+              <div className="w-12 h-12 rounded-xl bg-amber-50 border border-[#c5a059]/40 flex items-center justify-center text-2xl shadow-inner">
                 🦀
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xl font-bold text-white">
+                  <span className="font-mono text-xl font-bold text-[#121826]">
                     Order #{currentOrder.orderId}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider">
                     Active
                   </span>
                 </div>
-                <div className="text-xs text-slate-400 flex items-center gap-3 mt-1">
-                  <span>Guest: <strong className="text-slate-200">{currentOrder.customerName}</strong></span>
+                <div className="text-xs text-stone-500 flex items-center gap-3 mt-1 font-light">
+                  <span>Guest: <strong className="text-stone-800">{currentOrder.customerName}</strong></span>
                   <span>•</span>
-                  <span>Estimated: <strong className="text-[#f5df88]">{currentOrder.estimatedDeliveryTime}</strong></span>
+                  <span>Estimated: <strong className="text-[#99752b]">{currentOrder.estimatedDeliveryTime}</strong></span>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-4 text-xs">
               <div className="text-right hidden sm:block">
-                <span className="text-slate-400 block text-[11px] uppercase tracking-wider">Destination</span>
-                <span className="font-medium text-slate-200 flex items-center gap-1 justify-end">
-                  <MapPin className="w-3.5 h-3.5 text-[#e04b2b]" />
+                <span className="text-stone-400 block text-[11px] uppercase tracking-wider font-medium">Destination</span>
+                <span className="font-medium text-stone-800 flex items-center gap-1 justify-end">
+                  <MapPin className="w-3.5 h-3.5 text-[#d33c1d]" />
                   {currentOrder.deliveryAddress}
                 </span>
               </div>
@@ -115,35 +112,35 @@ export default function TrackerSection({
                 return (
                   <div
                     key={st.key}
-                    className={`p-4 rounded-2xl border transition-all text-left ${
+                    className={`p-4 rounded-xl border transition-all text-left ${
                       isCurrent
-                        ? 'bg-[#15233c] border-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.25)] scale-[1.02]'
+                        ? 'bg-amber-50/60 border-[#c5a059] shadow-sm scale-[1.02]'
                         : isPassed
-                        ? 'bg-[#0c1424] border-emerald-500/30 text-slate-300'
-                        : 'bg-[#080d17]/50 border-white/5 opacity-40'
+                        ? 'bg-emerald-50/40 border-emerald-200 text-stone-800'
+                        : 'bg-stone-50 border-stone-200 opacity-50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div
                         className={`w-9 h-9 rounded-full flex items-center justify-center ${
                           isCurrent
-                            ? 'bg-[#d4af37] text-black shadow-[0_0_15px_#d4af37]'
+                            ? 'bg-[#c5a059] text-white shadow-xs'
                             : isPassed
-                            ? 'bg-emerald-500 text-white'
-                            : 'bg-[#101726] text-slate-500'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-stone-200 text-stone-400'
                         }`}
                       >
                         <Icon className="w-4 h-4 stroke-[2.2]" />
                       </div>
-                      <span className={`text-[10px] font-mono font-bold ${isCurrent ? 'text-amber-300' : isPassed ? 'text-emerald-400' : 'text-slate-500'}`}>
+                      <span className={`text-[10px] font-mono font-bold ${isCurrent ? 'text-[#99752b]' : isPassed ? 'text-emerald-700' : 'text-stone-400'}`}>
                         0{idx + 1}
                       </span>
                     </div>
 
-                    <h4 className="font-serif text-sm font-bold text-white mb-1">
+                    <h4 className="font-serif text-sm font-bold text-[#121826] mb-1">
                       {st.label}
                     </h4>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-[11px] text-stone-500 font-light">
                       {st.desc}
                     </p>
                   </div>
@@ -153,14 +150,14 @@ export default function TrackerSection({
           </div>
 
           {/* Quick Footer info */}
-          <div className="mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+          <div className="mt-4 pt-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500 font-light">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Lagoon Tank Certificate: <strong className="text-slate-200">{currentOrder.lagoonCatchId}</strong></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Lagoon Tank Certificate: <strong className="text-stone-800">{currentOrder.lagoonCatchId}</strong></span>
             </div>
             <div className="flex items-center gap-4">
-              <span>Chef: <strong className="text-white">{currentOrder.chefName}</strong></span>
-              <span>Courier: <strong className="text-white">{currentOrder.courierName}</strong></span>
+              <span>Chef: <strong className="text-[#121826] font-medium">{currentOrder.chefName}</strong></span>
+              <span>Courier: <strong className="text-[#121826] font-medium">{currentOrder.courierName}</strong></span>
             </div>
           </div>
         </div>

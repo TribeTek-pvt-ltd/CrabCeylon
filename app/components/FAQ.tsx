@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, Plus, Minus } from 'lucide-react';
+import { ChevronDown, Phone, Sparkles } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -50,39 +50,40 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 relative bg-[#07090e] text-slate-100 border-t border-white/[0.06] overflow-hidden">
+    <section id="faq" className="py-24 relative bg-[#f6f2ea] text-[#121826] border-t border-stone-200/70 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-3">
-            <span className="w-6 h-[1px] bg-[#c5a059]" />
-            <span className="text-[10px] uppercase tracking-[0.35em] text-[#c5a059] font-medium">
+            <span className="w-8 h-[1.5px] bg-[#c5a059]" />
+            <span className="text-[11px] uppercase tracking-[0.35em] text-[#99752b] font-bold">
               Guest Inquiries & Curations
             </span>
-            <span className="w-6 h-[1px] bg-[#c5a059]" />
+            <span className="w-8 h-[1.5px] bg-[#c5a059]" />
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-normal text-white tracking-tight mb-4">
+          <h2 className="font-didone text-3xl sm:text-5xl font-black text-[#121826] tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
 
-          <p className="text-slate-400 text-sm leading-relaxed max-w-lg mx-auto font-light">
+          <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-light">
             Everything you need to know about our wild Ceylon lagoon crabs, Yorkville reservations, and heated delivery throughout Toronto.
           </p>
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
               <div
                 key={index}
-                className={`border transition-all duration-300 ${
+                className={`rounded-xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-[#0d121f] border-[#c5a059]/40'
-                    : 'bg-[#090d16] border-white/[0.07] hover:border-white/20'
+                    ? 'bg-white border-[#c5a059] shadow-md'
+                    : 'bg-white/90 border-stone-200/90 hover:border-stone-300 shadow-xs'
                 }`}
               >
                 <button
@@ -92,21 +93,27 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                 >
                   <div>
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#c5a059] font-medium block mb-1">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold block mb-1">
                       {faq.category}
                     </span>
-                    <h3 className="font-serif text-base sm:text-lg text-white font-normal leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg text-[#121826] font-semibold leading-snug">
                       {faq.question}
                     </h3>
                   </div>
 
-                  <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 border-[#c5a059]/40 text-[#c5a059]' : 'text-slate-400'}`}>
+                  <div
+                    className={`w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
+                      isOpen
+                        ? 'rotate-180 bg-[#c5a059] border-[#c5a059] text-white'
+                        : 'bg-stone-50 text-stone-500'
+                    }`}
+                  >
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/[0.05] pt-4 animate-in fade-in duration-200">
+                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 text-xs sm:text-sm text-stone-600 font-light leading-relaxed border-t border-stone-100 pt-4 animate-in fade-in duration-200 text-left">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -116,23 +123,24 @@ export default function FAQ() {
         </div>
 
         {/* Bottom Concierge Assistance Callout */}
-        <div className="mt-12 p-6 bg-[#0a0f19] border border-white/[0.08] text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 p-6 rounded-2xl bg-white border border-[#c5a059]/35 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="text-left">
-            <h4 className="font-serif text-sm font-normal text-white">
+            <h4 className="font-serif text-base font-bold text-[#121826]">
               Have a special culinary or dietary request?
             </h4>
-            <p className="text-xs text-slate-400 font-light mt-0.5">
-              Our Yorkville sommelier and kitchen team are at your service.
+            <p className="text-xs text-stone-500 font-light mt-0.5">
+              Our Yorkville sommelier and kitchen directors are at your service.
             </p>
           </div>
 
           <a
             href="tel:+14169242722"
-            className="px-5 py-2.5 bg-[#141b2b] hover:bg-[#c5a059] hover:text-[#07090e] text-[#f4df95] font-semibold text-xs uppercase tracking-[0.2em] transition-colors whitespace-nowrap"
+            className="px-6 py-3 bg-[#121826] hover:bg-[#c5a059] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-lg whitespace-nowrap shadow-xs hover:shadow-md"
           >
             Call Concierge: (416) 924-CRAB
           </a>
         </div>
+
       </div>
     </section>
   );

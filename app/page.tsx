@@ -10,6 +10,7 @@ import OrderTrackerModal from './components/OrderTrackerModal';
 import OrderSearchModal from './components/OrderSearchModal';
 import OrderConfirmationModal from './components/OrderConfirmationModal';
 import HeritageStory from './components/HeritageStory';
+import FoundersSection from './components/FoundersSection';
 import ReservationModal from './components/ReservationModal';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
@@ -20,38 +21,39 @@ export default function Home() {
   // Cart State
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
-      cartId: 'default-chili-crab',
+      cartId: 'default-crab-ceylon',
       item: {
-        id: 'chili-crab',
-        title: 'Imperial Ceylon Chili Crab',
-        category: 'crabs',
-        price: 68,
-        description: 'Wild Ceylon lagoon mud crab seared over high heat in our house 21-spice sweet and fiery chili reduction.',
+        id: 'crab-signature',
+        title: 'Crab (Signature Preparation)',
+        category: 'crab-lobster',
+        price: 44.99,
+        description: 'Crab prepared in your choice of signature flavour and served with sweet corn and roasted potatoes.',
         image: '/images/hero-crab.jpg',
-        rating: 4.96,
-        reviewsCount: 342,
-        isCrab: true
+        rating: 4.98,
+        reviewsCount: 384,
+        isCrab: true,
+        spiceLevels: ['Chili Garlic', 'Black Pepper', 'Curry', 'Deviled']
       },
       quantity: 1,
-      selectedSize: { name: 'Royal Jumbo', weight: '1.2kg', priceDelta: 55 },
-      selectedSpice: 'Classic Medium',
-      selectedPrep: 'Whole Cracked Claws',
-      itemTotalPrice: 123
+      selectedSpice: 'Chili Garlic',
+      itemTotalPrice: 44.99
     },
     {
-      cartId: 'default-kade-bread',
+      cartId: 'default-special-kottu',
       item: {
-        id: 'kade-bread',
-        title: 'Woodfired Artisan Crust Bread',
-        category: 'accompaniments',
-        price: 9,
-        description: 'Thick-crusted wood-baked sourdough loaf brushed with sea salt and roasted garlic herb butter.',
-        image: '/images/hero-crab.jpg',
-        rating: 4.95,
-        reviewsCount: 520
+        id: 'crab-ceylon-special-kottu',
+        title: 'Crab Ceylon Special Kottu',
+        category: 'kottu',
+        price: 39.99,
+        description: 'Our signature combination of crab meat, chicken and shrimp with chopped roti and vegetables.',
+        image: '/images/ceylon-kottu.jpg',
+        rating: 4.97,
+        reviewsCount: 290,
+        spiceLevels: ['Mild', 'Medium', 'Hot', 'Extra Spicy']
       },
-      quantity: 2,
-      itemTotalPrice: 18
+      quantity: 1,
+      selectedSpice: 'Medium',
+      itemTotalPrice: 39.99
     }
   ]);
 
@@ -144,7 +146,7 @@ export default function Home() {
   const cartCount = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#07090e] text-slate-100 selection:bg-[#c5a059] selection:text-black">
+    <div className="min-h-screen flex flex-col bg-[#faf8f5] text-[#121826] selection:bg-[#c5a059] selection:text-white">
       {/* Top Fixed Navbar */}
       <Navbar
         cartCount={cartCount}
@@ -173,6 +175,9 @@ export default function Home() {
 
         {/* Heritage & Origin Story */}
         <HeritageStory />
+
+        {/* The Founders / Ministers of Crab */}
+        <FoundersSection />
 
         {/* Acclaimed Testimonials */}
         <Testimonials />
