@@ -50,20 +50,20 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 relative bg-[#f6f2ea] text-[#121826] border-t border-stone-200/70 overflow-hidden">
+    <section id="faq" className="py-24 relative bg-[#ffffff] text-[#111827] border-t border-stone-200 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-3">
-            <span className="w-8 h-[1.5px] bg-[#c5a059]" />
-            <span className="text-[11px] uppercase tracking-[0.35em] text-[#99752b] font-bold">
+            <span className="w-8 h-[1.5px] bg-[#dc2626]" />
+            <span className="text-[11px] uppercase tracking-[0.35em] text-[#dc2626] font-bold">
               Guest Inquiries & Curations
             </span>
-            <span className="w-8 h-[1.5px] bg-[#c5a059]" />
+            <span className="w-8 h-[1.5px] bg-[#dc2626]" />
           </div>
 
-          <h2 className="font-didone text-3xl sm:text-5xl font-black text-[#121826] tracking-tight mb-4">
+          <h2 className="font-didone text-3xl sm:text-5xl font-black text-[#111827] tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
 
@@ -82,8 +82,8 @@ export default function FAQ() {
                 key={index}
                 className={`rounded-xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-white border-[#c5a059] shadow-md'
-                    : 'bg-white/90 border-stone-200/90 hover:border-stone-300 shadow-xs'
+                    ? 'bg-white border-[#dc2626] shadow-md'
+                    : 'bg-white border-stone-200 hover:border-red-300 shadow-xs'
                 }`}
               >
                 <button
@@ -93,10 +93,10 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                 >
                   <div>
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold block mb-1">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold block mb-1">
                       {faq.category}
                     </span>
-                    <h3 className="font-serif text-base sm:text-lg text-[#121826] font-semibold leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg text-[#111827] font-semibold leading-snug">
                       {faq.question}
                     </h3>
                   </div>
@@ -104,7 +104,7 @@ export default function FAQ() {
                   <div
                     className={`w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
                       isOpen
-                        ? 'rotate-180 bg-[#c5a059] border-[#c5a059] text-white'
+                        ? 'rotate-180 bg-[#dc2626] border-[#dc2626] text-white'
                         : 'bg-stone-50 text-stone-500'
                     }`}
                   >
@@ -123,9 +123,9 @@ export default function FAQ() {
         </div>
 
         {/* Bottom Concierge Assistance Callout */}
-        <div className="mt-12 p-6 rounded-2xl bg-white border border-[#c5a059]/35 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div className="mt-12 p-6 rounded-2xl bg-white border border-red-500/25 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="text-left">
-            <h4 className="font-serif text-base font-bold text-[#121826]">
+            <h4 className="font-serif text-base font-bold text-[#111827]">
               Have a special culinary or dietary request?
             </h4>
             <p className="text-xs text-stone-500 font-light mt-0.5">
@@ -135,7 +135,7 @@ export default function FAQ() {
 
           <a
             href="tel:+14169242722"
-            className="px-6 py-3 bg-[#121826] hover:bg-[#c5a059] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-lg whitespace-nowrap shadow-xs hover:shadow-md"
+            className="px-6 py-3 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-lg whitespace-nowrap shadow-xs hover:shadow-md"
           >
             Call Concierge: (416) 924-CRAB
           </a>

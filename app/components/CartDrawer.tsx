@@ -88,17 +88,17 @@ export default function CartDrawer({
   return (
     <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white border-l border-[#c5a059]/40 shadow-2xl flex flex-col justify-between text-[#121826]">
+        <div className="w-screen max-w-md bg-white border-l border-red-200 shadow-2xl flex flex-col justify-between text-[#121826]">
           
           {/* Header */}
-          <div className="p-6 border-b border-stone-200 flex items-center justify-between bg-[#faf8f5]">
+          <div className="p-6 border-b border-stone-200 flex items-center justify-between bg-stone-50">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/40 flex items-center justify-center text-[#99752b]">
+              <div className="w-10 h-10 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-[#dc2626]">
                 <ShoppingBag className="w-4 h-4 stroke-[2]" />
               </div>
               <div className="text-left">
                 <h3 className="font-didone text-xl text-[#121826] font-bold">Order Bag</h3>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#99752b] font-semibold">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#dc2626] font-semibold">
                   {cartItems.length} {cartItems.length === 1 ? 'Curated Dish' : 'Curated Dishes'}
                 </span>
               </div>
@@ -162,7 +162,7 @@ export default function CartDrawer({
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none focus:ring-1 focus:ring-[#c5a059]"
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#dc2626] focus:outline-none focus:ring-1 focus:ring-[#dc2626]"
                     placeholder="Enter Toronto address..."
                   />
                 </div>
@@ -175,7 +175,7 @@ export default function CartDrawer({
                     type="text"
                     value={tableNumber}
                     onChange={(e) => setTableNumber(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none focus:ring-1 focus:ring-[#c5a059]"
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#dc2626] focus:outline-none focus:ring-1 focus:ring-[#dc2626]"
                   />
                 </div>
               ) : (
@@ -194,7 +194,7 @@ export default function CartDrawer({
                     type="text"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none"
+                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#dc2626] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -205,7 +205,7 @@ export default function CartDrawer({
                     type="text"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
-                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#c5a059] focus:outline-none"
+                    className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 text-xs focus:border-[#dc2626] focus:outline-none"
                   />
                 </div>
               </div>
@@ -213,7 +213,7 @@ export default function CartDrawer({
 
             {/* Cart Items List */}
             <div className="space-y-3 text-left">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold block">
                 Selected Catches
               </span>
 
@@ -252,7 +252,7 @@ export default function CartDrawer({
 
                       <div className="text-[11px] text-stone-500 space-y-0.5 mt-0.5">
                         {item.selectedSize && (
-                          <div className="text-[#99752b] font-medium">
+                          <div className="text-[#dc2626] font-medium">
                             {item.selectedSize.name} (~{item.selectedSize.weight})
                           </div>
                         )}
@@ -262,7 +262,7 @@ export default function CartDrawer({
                       </div>
 
                       <div className="flex items-center justify-between mt-2 pt-2 border-t border-stone-100">
-                        <span className="font-mono text-sm text-[#99752b] font-bold">
+                        <span className="font-mono text-sm text-[#dc2626] font-bold">
                           ${item.itemTotalPrice.toFixed(2)} CAD
                         </span>
 
@@ -301,12 +301,12 @@ export default function CartDrawer({
                       placeholder="Privilege code (e.g. CRABVIP)"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      className="w-full pl-8 pr-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-800 placeholder-stone-400 uppercase focus:border-[#c5a059] outline-none"
+                      className="w-full pl-8 pr-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-800 placeholder-stone-400 uppercase focus:border-[#dc2626] outline-none"
                     />
                   </div>
                   <button
                     onClick={applyPromo}
-                    className="px-4 py-2 bg-stone-100 border border-[#c5a059] text-[#99752b] hover:bg-[#c5a059] hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-all cursor-pointer"
+                    className="px-4 py-2 bg-red-50 border border-red-300 text-[#dc2626] hover:bg-[#dc2626] hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-all cursor-pointer"
                   >
                     Apply
                   </button>
@@ -323,7 +323,7 @@ export default function CartDrawer({
 
           {/* Checkout Footer */}
           {cartItems.length > 0 && (
-            <div className="p-6 border-t border-stone-200 bg-[#faf8f5] space-y-3 text-left">
+            <div className="p-6 border-t border-stone-200 bg-stone-50 space-y-3 text-left">
               <div className="space-y-1.5 text-xs text-stone-600">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
@@ -331,7 +331,7 @@ export default function CartDrawer({
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="flex items-center gap-1">
-                    <Truck className="w-3 h-3 text-[#99752b]" />
+                    <Truck className="w-3 h-3 text-[#dc2626]" />
                     Thermal Heated Courier
                   </span>
                   <span className="text-[#121826] font-mono font-semibold">
@@ -344,9 +344,9 @@ export default function CartDrawer({
                     <span className="font-mono">-${discountAmount.toFixed(2)} CAD</span>
                   </div>
                 )}
-                <div className="flex justify-between text-base font-bold text-[#121826] pt-2 border-t border-stone-200">
+                <div className="flex justify-between text-base font-bold text-[#111827] pt-2 border-t border-stone-200">
                   <span className="font-serif">Total</span>
-                  <span className="font-mono text-[#99752b] text-xl font-black">
+                  <span className="font-mono text-[#dc2626] text-xl font-black">
                     ${grandTotal.toFixed(2)} CAD
                   </span>
                 </div>
@@ -355,7 +355,7 @@ export default function CartDrawer({
               <button
                 onClick={handleCheckout}
                 disabled={isSubmitting}
-                className="w-full py-4 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-lg"
+                className="w-full py-4 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md rounded-lg"
               >
                 {isSubmitting ? (
                   <span>Securing Live Lagoon Catch...</span>
@@ -368,7 +368,7 @@ export default function CartDrawer({
               </button>
 
               <div className="flex items-center justify-center gap-1.5 text-[10px] text-stone-500 uppercase tracking-widest pt-1">
-                <ShieldCheck className="w-3 h-3 text-[#99752b]" />
+                <ShieldCheck className="w-3 h-3 text-[#dc2626]" />
                 <span>Certified Live Saline Weighing Guarantee</span>
               </div>
             </div>

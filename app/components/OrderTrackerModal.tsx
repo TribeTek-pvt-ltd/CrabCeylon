@@ -99,17 +99,17 @@ export default function OrderTrackerModal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs p-3 sm:p-6 flex items-center justify-center animate-in fade-in duration-200">
-      <div className="relative w-full max-w-3xl bg-white border border-[#c5a059]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto text-[#121826] max-h-[92vh]">
+      <div className="relative w-full max-w-3xl bg-white border border-red-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto text-[#111827] max-h-[92vh]">
         
         {/* Header */}
-        <div className="p-6 border-b border-stone-200 bg-[#faf8f5] flex items-center justify-between">
+        <div className="p-6 border-b border-stone-200 bg-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/40 flex items-center justify-center text-[#99752b]">
+            <div className="w-10 h-10 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-[#dc2626]">
               <Compass className="w-5 h-5" />
             </div>
             <div className="text-left">
               <div className="flex items-center gap-2">
-                <span className="font-didone text-lg font-bold tracking-wide text-[#121826]">
+                <span className="font-didone text-lg font-bold tracking-wide text-[#111827]">
                   Live Catch Tracking
                 </span>
                 <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
@@ -120,7 +120,7 @@ export default function OrderTrackerModal({
                 <span>Order Reference:</span>
                 <button
                   onClick={copyOrderId}
-                  className="font-mono text-[#99752b] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                  className="font-mono text-[#dc2626] font-bold hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   #{activeOrder.orderId}
                   {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400" />}
@@ -141,23 +141,23 @@ export default function OrderTrackerModal({
         <div className="overflow-y-auto p-6 space-y-6 text-left">
           
           {/* Estimated Arrival Banner */}
-          <div className="p-5 rounded-xl bg-stone-50 border border-[#c5a059]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+          <div className="p-5 rounded-xl bg-stone-50 border border-red-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold block mb-1">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold block mb-1">
                 Estimated Delivery Arrival
               </span>
-              <div className="text-2xl sm:text-3xl font-didone font-bold text-[#121826]">
+              <div className="text-2xl sm:text-3xl font-didone font-bold text-[#111827]">
                 {activeOrder.estimatedDeliveryTime}
               </div>
               <p className="text-xs text-stone-600 mt-1 flex items-center gap-1.5 font-light">
-                <MapPin className="w-3.5 h-3.5 text-[#99752b]" />
+                <MapPin className="w-3.5 h-3.5 text-[#dc2626]" />
                 {activeOrder.deliveryAddress}
               </p>
             </div>
 
             <button
               onClick={handleNextStage}
-              className="px-4 py-2.5 rounded-lg border border-[#c5a059] text-[#99752b] hover:bg-[#c5a059] hover:text-white text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2 whitespace-nowrap self-stretch sm:self-auto justify-center cursor-pointer shadow-2xs"
+              className="px-4 py-2.5 rounded-lg border border-[#dc2626] text-[#dc2626] hover:bg-[#dc2626] hover:text-white text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2 whitespace-nowrap self-stretch sm:self-auto justify-center cursor-pointer shadow-2xs"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Simulate Next Stage</span>
@@ -182,7 +182,7 @@ export default function OrderTrackerModal({
                     key={stg.key}
                     className={`p-4 rounded-xl border transition-all flex items-center justify-between ${
                       isCurrent
-                        ? 'bg-amber-50/60 border-[#c5a059] shadow-sm'
+                        ? 'bg-red-50/60 border-[#dc2626] shadow-sm'
                         : isPassed
                         ? 'bg-emerald-50/40 border-emerald-200 text-stone-800'
                         : 'bg-stone-50 border-stone-200 opacity-50'
@@ -192,7 +192,7 @@ export default function OrderTrackerModal({
                       <div
                         className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${
                           isCurrent
-                            ? 'bg-[#c5a059] text-white shadow-xs'
+                            ? 'bg-[#dc2626] text-white shadow-xs'
                             : isPassed
                             ? 'bg-emerald-100 text-emerald-700 border border-emerald-300'
                             : 'bg-stone-200 text-stone-400'
@@ -203,14 +203,14 @@ export default function OrderTrackerModal({
 
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className={`text-[10px] uppercase tracking-[0.2em] font-bold ${isCurrent ? 'text-[#99752b]' : isPassed ? 'text-emerald-700' : 'text-stone-400'}`}>
+                          <span className={`text-[10px] uppercase tracking-[0.2em] font-bold ${isCurrent ? 'text-[#dc2626]' : isPassed ? 'text-emerald-700' : 'text-stone-400'}`}>
                             Milestone 0{idx + 1}
                           </span>
                           {isCurrent && (
-                            <span className="w-2 h-2 rounded-full bg-[#c5a059] animate-ping" />
+                            <span className="w-2 h-2 rounded-full bg-[#dc2626] animate-ping" />
                           )}
                         </div>
-                        <h5 className="font-serif text-sm text-[#121826] font-bold">
+                        <h5 className="font-serif text-sm text-[#111827] font-bold">
                           {stg.title}
                         </h5>
                         <p className="text-[11px] text-stone-500 mt-0.5 font-light">
@@ -223,7 +223,7 @@ export default function OrderTrackerModal({
                       {isPassed ? (
                         <span className="text-xs text-emerald-700 font-bold">Completed</span>
                       ) : isCurrent ? (
-                        <span className="text-xs font-bold text-[#99752b] uppercase tracking-wider">In Progress</span>
+                        <span className="text-xs font-bold text-[#dc2626] uppercase tracking-wider">In Progress</span>
                       ) : (
                         <span className="text-xs text-stone-400">Pending</span>
                       )}
@@ -237,7 +237,7 @@ export default function OrderTrackerModal({
           {/* Sourcing Transparency & Courier Panel */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#99752b] font-bold block">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#dc2626] font-bold block">
                 Lagoon Catch Certificate
               </span>
               <div className="font-mono text-xs text-emerald-700 font-semibold">
@@ -250,10 +250,10 @@ export default function OrderTrackerModal({
 
             <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#99752b] font-bold block mb-1">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#dc2626] font-bold block mb-1">
                   Private Courier Envoy
                 </span>
-                <span className="text-xs font-bold text-[#121826] block">
+                <span className="text-xs font-bold text-[#111827] block">
                   {activeOrder.courierName}
                 </span>
                 <span className="text-[11px] text-stone-500 font-light">
@@ -262,7 +262,7 @@ export default function OrderTrackerModal({
               </div>
               <a
                 href={`tel:${activeOrder.courierPhone}`}
-                className="p-2.5 rounded-lg bg-white border border-stone-200 text-[#99752b] hover:bg-[#c5a059] hover:text-white transition-colors shadow-2xs"
+                className="p-2.5 rounded-lg bg-white border border-stone-200 text-[#dc2626] hover:bg-[#dc2626] hover:text-white transition-colors shadow-2xs"
                 title="Call Courier"
               >
                 <Phone className="w-4 h-4" />
@@ -278,24 +278,24 @@ export default function OrderTrackerModal({
             {activeOrder.items.map((it, i) => (
               <div key={i} className="flex justify-between text-stone-700">
                 <span>
-                  {it.quantity}x {it.title} {it.size && <span className="text-[#99752b] font-medium">({it.size})</span>}
+                  {it.quantity}x {it.title} {it.size && <span className="text-[#dc2626] font-medium">({it.size})</span>}
                 </span>
                 <span className="font-mono text-stone-900 font-semibold">${it.price} CAD</span>
               </div>
             ))}
-            <div className="pt-2 border-t border-stone-200 flex justify-between font-bold text-[#121826]">
+            <div className="pt-2 border-t border-stone-200 flex justify-between font-bold text-[#111827]">
               <span>Total Investment</span>
-              <span className="font-mono text-[#99752b] text-sm font-black">${activeOrder.total} CAD</span>
+              <span className="font-mono text-[#dc2626] text-sm font-black">${activeOrder.total} CAD</span>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-stone-200 bg-[#faf8f5] flex items-center justify-between text-xs text-stone-600">
-          <span>Yorkville Concierge Desk: <strong className="text-[#121826]">+1 (416) 924-CRAB</strong></span>
+        <div className="p-4 border-t border-stone-200 bg-white flex items-center justify-between text-xs text-stone-600">
+          <span>Yorkville Concierge Desk: <strong className="text-[#111827]">+1 (416) 924-CRAB</strong></span>
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-[#121826] hover:bg-[#c5a059] text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
+            className="px-5 py-2 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
           >
             Close Radar
           </button>

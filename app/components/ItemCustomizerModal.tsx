@@ -53,7 +53,7 @@ export default function ItemCustomizerModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-white border border-[#c5a059]/40 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col text-[#121826]">
+      <div className="relative w-full max-w-2xl bg-white border border-red-500/30 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col text-[#111827]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -74,7 +74,7 @@ export default function ItemCustomizerModal({
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
 
           {item.badge && (
-            <div className="absolute top-4 left-4 px-3 py-1 bg-white/95 backdrop-blur-md border border-[#c5a059]/40 text-[#99752b] text-[10px] uppercase tracking-[0.2em] font-bold rounded shadow-xs">
+            <div className="absolute top-4 left-4 px-3 py-1 bg-white/95 backdrop-blur-md border border-red-300 text-[#dc2626] text-[10px] uppercase tracking-[0.2em] font-bold rounded shadow-xs">
               {item.badge}
             </div>
           )}
@@ -84,9 +84,9 @@ export default function ItemCustomizerModal({
               {item.title}
             </h2>
             <div className="flex items-center gap-3 text-xs text-stone-200">
-              <div className="flex items-center text-[#f4df95]">
+              <div className="flex items-center text-[#ef4444]">
                 <Star className="w-3.5 h-3.5 fill-current mr-1" />
-                <span className="font-bold">{item.rating}</span>
+                <span className="font-bold text-white">{item.rating}</span>
                 <span className="text-stone-300 ml-1">({item.reviewsCount} reviews)</span>
               </div>
               <span className="text-stone-400">•</span>
@@ -105,11 +105,11 @@ export default function ItemCustomizerModal({
           {item.sizes && item.sizes.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-3">
-                <label className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold flex items-center gap-1.5">
-                  <Scale className="w-4 h-4 text-[#99752b]" />
+                <label className="text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold flex items-center gap-1.5">
+                  <Scale className="w-4 h-4 text-[#dc2626]" />
                   {item.category === 'boil' ? 'Boil Selection / Upgrade' : 'Select Catch Weight & Portion'}
                 </label>
-                <span className="text-[10px] uppercase tracking-wider text-emerald-800 font-mono bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">
+                <span className="text-[10px] uppercase tracking-wider text-red-800 font-mono bg-red-50 px-2 py-0.5 rounded border border-red-200 font-semibold">
                   {item.category === 'boil' ? 'Feast Upgrade' : 'Fresh Ceylon Catch'}
                 </span>
               </div>
@@ -121,7 +121,7 @@ export default function ItemCustomizerModal({
                     onClick={() => setSelectedSize(size)}
                     className={`flex items-center justify-between p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedSize.name === size.name
-                        ? 'bg-[#121826] border-[#121826] text-white shadow-sm'
+                        ? 'bg-[#111827] border-[#111827] text-white shadow-sm'
                         : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
                     }`}
                   >
@@ -129,14 +129,14 @@ export default function ItemCustomizerModal({
                       <div className="font-serif text-sm font-bold flex items-center gap-1.5">
                         {size.name}
                         {selectedSize.name === size.name && (
-                          <Check className="w-3.5 h-3.5 text-[#f4df95]" />
+                          <Check className="w-3.5 h-3.5 text-[#ef4444]" />
                         )}
                       </div>
                       <div className={`text-[11px] ${selectedSize.name === size.name ? 'text-stone-300' : 'text-stone-500'}`}>
                         {size.weight.toLowerCase().includes('upgrade') ? size.weight : `Live Weight: ~${size.weight}`}
                       </div>
                     </div>
-                    <div className={`text-xs font-mono font-bold ${selectedSize.name === size.name ? 'text-[#f4df95]' : 'text-[#99752b]'}`}>
+                    <div className={`text-xs font-mono font-bold ${selectedSize.name === size.name ? 'text-[#ef4444]' : 'text-[#dc2626]'}`}>
                       {size.priceDelta > 0 ? `+$${size.priceDelta.toFixed(2)} CAD` : 'Included'}
                     </div>
                   </button>
@@ -148,8 +148,8 @@ export default function ItemCustomizerModal({
           {/* Spice Level / Flavour Selection */}
           {item.spiceLevels && item.spiceLevels.length > 0 && (
             <div>
-              <label className="text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold flex items-center gap-1.5 mb-2.5">
-                <Flame className="w-3.5 h-3.5 text-[#d33c1d]" />
+              <label className="text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold flex items-center gap-1.5 mb-2.5">
+                <Flame className="w-3.5 h-3.5 text-[#dc2626]" />
                 {item.category === 'crab-lobster' || item.category === 'appetizers' || item.title.includes('Wings')
                   ? 'Choose Your Flavour'
                   : item.category === 'pasta'
@@ -164,7 +164,7 @@ export default function ItemCustomizerModal({
                     onClick={() => setSelectedSpice(lvl)}
                     className={`p-2.5 rounded-lg border text-center text-xs transition-all cursor-pointer ${
                       selectedSpice === lvl
-                        ? 'bg-[#121826] border-[#121826] text-[#f4df95] font-bold shadow-xs'
+                        ? 'bg-[#dc2626] border-[#dc2626] text-white font-bold shadow-xs'
                         : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
                     }`}
                   >
@@ -185,14 +185,14 @@ export default function ItemCustomizerModal({
               placeholder="e.g. Extra toasted lime wedges, less salt, sauce on side..."
               value={specialInstructions}
               onChange={(e) => setSpecialInstructions(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-lg bg-stone-50 border border-stone-200 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#c5a059] transition-colors"
+              className="w-full px-4 py-2.5 rounded-lg bg-stone-50 border border-stone-200 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#dc2626] transition-colors"
             />
           </div>
         </div>
 
         {/* Modal Footer */}
-        <div className="p-5 border-t border-stone-200 bg-[#faf8f5] flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 bg-white border border-stone-200 px-3 py-1.5 rounded-lg shadow-2xs">
+        <div className="p-5 border-t border-stone-200 bg-white flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 bg-stone-50 border border-stone-200 px-3 py-1.5 rounded-lg shadow-2xs">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
               disabled={quantity <= 1}
@@ -213,7 +213,7 @@ export default function ItemCustomizerModal({
 
           <button
             onClick={handleAdd}
-            className="flex-1 py-3.5 px-6 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-lg flex items-center justify-between cursor-pointer shadow-md"
+            className="flex-1 py-3.5 px-6 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all rounded-lg flex items-center justify-between cursor-pointer shadow-md"
           >
             <span>Add to Order Bag</span>
             <span className="font-mono text-sm font-bold">${totalPrice.toFixed(2)} CAD</span>

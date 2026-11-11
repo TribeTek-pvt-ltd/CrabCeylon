@@ -43,7 +43,7 @@ export default function OrderSearchModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-white border border-[#c5a059]/40 rounded-2xl p-6 sm:p-8 text-[#121826] shadow-2xl">
+      <div className="relative w-full max-w-md bg-white border border-red-500/30 rounded-2xl p-6 sm:p-8 text-[#111827] shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -53,10 +53,10 @@ export default function OrderSearchModal({
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/30 flex items-center justify-center mx-auto mb-3 text-[#99752b]">
+          <div className="w-12 h-12 rounded-full bg-red-50 border border-red-200 flex items-center justify-center mx-auto mb-3 text-[#dc2626]">
             <Compass className="w-5 h-5" />
           </div>
-          <h3 className="font-didone text-2xl text-[#121826] font-bold">
+          <h3 className="font-didone text-2xl text-[#111827] font-bold">
             Track Your Order
           </h3>
           <p className="text-xs text-stone-600 mt-1 font-light leading-relaxed">
@@ -66,7 +66,7 @@ export default function OrderSearchModal({
 
         <form onSubmit={handleSearch} className="space-y-4 text-left">
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.25em] text-[#99752b] font-bold mb-1.5">
+            <label className="block text-[10px] uppercase tracking-[0.25em] text-[#dc2626] font-bold mb-1.5">
               Order ID / Number
             </label>
             <div className="relative">
@@ -78,12 +78,12 @@ export default function OrderSearchModal({
                   setOrderQuery(e.target.value);
                   setErrorMessage('');
                 }}
-                className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 font-mono text-sm focus:outline-none focus:border-[#c5a059] transition-colors uppercase tracking-wider shadow-2xs"
+                className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 font-mono text-sm focus:outline-none focus:border-[#dc2626] transition-colors uppercase tracking-wider shadow-2xs"
                 autoFocus
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer shadow-xs"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer shadow-xs"
               >
                 Track
               </button>
@@ -105,25 +105,25 @@ export default function OrderSearchModal({
               <button
                 type="button"
                 onClick={() => handleSelectSample('CC-8429')}
-                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#c5a059] text-left text-xs transition-all cursor-pointer shadow-2xs group"
+                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#dc2626] text-left text-xs transition-all cursor-pointer shadow-2xs group"
               >
                 <div>
-                  <span className="font-mono font-bold text-[#99752b]">#CC-8429</span>
+                  <span className="font-mono font-bold text-[#dc2626]">#CC-8429</span>
                   <span className="text-stone-500 block text-[11px] font-light">Downtown Toronto Penthouse • In Wok</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#99752b] group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#dc2626] group-hover:translate-x-0.5 transition-all" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleSelectSample('CC-9104')}
-                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#c5a059] text-left text-xs transition-all cursor-pointer shadow-2xs group"
+                className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-[#dc2626] text-left text-xs transition-all cursor-pointer shadow-2xs group"
               >
                 <div>
-                  <span className="font-mono font-bold text-[#99752b]">#CC-9104</span>
+                  <span className="font-mono font-bold text-[#dc2626]">#CC-9104</span>
                   <span className="text-stone-500 block text-[11px] font-light">Yorkville Garden Table #12 • Selecting Catch</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#99752b] group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#dc2626] group-hover:translate-x-0.5 transition-all" />
               </button>
             </div>
           </div>

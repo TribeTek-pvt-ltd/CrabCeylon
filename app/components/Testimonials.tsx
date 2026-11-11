@@ -29,17 +29,17 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-24 relative bg-[#faf8f5] text-[#121826] overflow-hidden border-t border-stone-200/60">
+    <section className="py-24 relative bg-[#ffffff] text-[#111827] overflow-hidden border-t border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 border border-[#c5a059]/40 text-xs font-semibold uppercase tracking-[0.2em] text-[#99752b] mb-4">
-            <Award className="w-4 h-4 text-[#99752b]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-xs font-semibold uppercase tracking-[0.2em] text-[#dc2626] mb-4">
+            <Award className="w-4 h-4 text-[#dc2626]" />
             <span>Acclaimed By The World</span>
           </div>
-          <h2 className="font-didone text-3xl sm:text-5xl font-black text-[#121826] tracking-tight mb-4">
-            Praised by <span className="text-gold-gradient font-black">Global Epicures</span>
+          <h2 className="font-didone text-3xl sm:text-5xl font-black text-[#111827] tracking-tight mb-4">
+            Praised by <span className="text-[#dc2626] font-black">Global Epicures</span>
           </h2>
           <p className="text-stone-600 text-sm sm:text-base font-light">
             Read the verdict from world-renowned chefs, culinary critics, and devoted seafood connoisseurs.
@@ -51,16 +51,16 @@ export default function Testimonials() {
           {reviews.map((rev, idx) => (
             <div
               key={idx}
-              className="glass-card rounded-2xl p-8 border border-stone-200/90 flex flex-col justify-between group hover:border-[#c5a059] shadow-sm hover:shadow-xl transition-all duration-400 bg-white"
+              className="glass-card rounded-2xl p-8 border border-stone-200 flex flex-col justify-between group hover:border-[#dc2626] shadow-sm hover:shadow-xl transition-all duration-400 bg-white"
             >
               <div className="space-y-4 text-left">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-amber-500">
+                  <div className="flex items-center gap-1 text-[#dc2626]">
                     {[...Array(rev.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <Quote className="w-7 h-7 text-[#c5a059]/30 group-hover:text-[#c5a059]/70 transition-colors" />
+                  <Quote className="w-7 h-7 text-red-500/25 group-hover:text-red-500/70 transition-colors" />
                 </div>
 
                 <p className="text-stone-700 text-sm leading-relaxed italic font-light">
@@ -69,10 +69,10 @@ export default function Testimonials() {
               </div>
 
               <div className="pt-6 mt-6 border-t border-stone-100 text-left">
-                <span className="text-[10px] uppercase font-bold text-[#99752b] block tracking-wider mb-1">
+                <span className="text-[10px] uppercase font-bold text-[#dc2626] block tracking-wider mb-1">
                   Ordered: {rev.dish}
                 </span>
-                <h4 className="font-serif font-bold text-[#121826] text-base">
+                <h4 className="font-serif font-bold text-[#111827] text-base">
                   {rev.author}
                 </h4>
                 <p className="text-xs text-stone-500 font-light mt-0.5">{rev.role}</p>
@@ -82,7 +82,7 @@ export default function Testimonials() {
         </div>
 
         {/* Brand Accolades Ribbon */}
-        <div className="mt-16 p-8 rounded-2xl bg-white border border-[#c5a059]/35 shadow-md grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="mt-16 p-8 rounded-2xl bg-white border border-red-500/30 shadow-md grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
             <div className="font-didone text-3xl sm:text-4xl font-extrabold text-[#121826] mb-1">45,000+</div>
             <div className="text-xs text-stone-500 font-medium uppercase tracking-wider">Wild Lagoon Crabs Served</div>

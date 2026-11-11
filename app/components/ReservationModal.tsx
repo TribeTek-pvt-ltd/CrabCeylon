@@ -141,16 +141,16 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
             </div>
 
             {/* Pre-order Live Crab */}
-            <div className="p-3.5 bg-amber-50/70 border border-[#c5a059]/40 rounded-xl flex items-start gap-3">
+            <div className="p-3.5 bg-red-50/70 border border-red-300 rounded-xl flex items-start gap-3">
               <input
                 type="checkbox"
                 id="preorder"
                 checked={preorderCrab}
                 onChange={(e) => setPreorderCrab(e.target.checked)}
-                className="mt-0.5 accent-[#c5a059] w-4 h-4 cursor-pointer"
+                className="mt-0.5 accent-[#dc2626] w-4 h-4 cursor-pointer"
               />
               <label htmlFor="preorder" className="text-xs text-stone-700 cursor-pointer">
-                <span className="font-bold text-[#121826] block">Pre-Reserve 1.2kg Jumbo Mud Crab</span>
+                <span className="font-bold text-[#111827] block">Pre-Reserve 1.2kg Jumbo Mud Crab</span>
                 Reserve a wild catch from today&apos;s saline tanks in advance for your table.
               </label>
             </div>
@@ -162,7 +162,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#c5a059] outline-none"
+                className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#dc2626] outline-none"
               />
               <div className="grid grid-cols-2 gap-2">
                 <input
@@ -171,21 +171,21 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#c5a059] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#dc2626] outline-none"
                 />
                 <input
                   type="email"
                   placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#c5a059] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-900 placeholder-stone-400 focus:border-[#dc2626] outline-none"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 bg-[#c5a059] hover:bg-[#b58e42] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-colors cursor-pointer mt-2 rounded-lg shadow-md"
+              className="w-full py-3.5 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold text-xs uppercase tracking-[0.2em] transition-colors cursor-pointer mt-2 rounded-lg shadow-md"
             >
               Confirm Table Reservation
             </button>
