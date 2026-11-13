@@ -254,11 +254,12 @@ export default function FullMenuPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 justify-items-center">
-              {filteredItems.map((item) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-14 lg:gap-16 justify-items-center pt-8">
+              {filteredItems.map((item, idx) => (
                 <FoodCard
                   key={item.id}
                   item={item}
+                  index={idx}
                   onCustomize={setCustomizingItem}
                   onQuickAdd={handleQuickAdd}
                 />

@@ -1,10 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Plus, Check, ShieldCheck } from 'lucide-react';
+import { Plus, ArrowRight, Check } from 'lucide-react';
 import { MENU_ITEMS, MenuItem } from '../data/restaurantData';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface MenuSectionProps {
   onSelectItem: (item: MenuItem) => void;
@@ -12,251 +18,471 @@ interface MenuSectionProps {
 }
 
 export default function MenuSection({ onSelectItem, onQuickAdd }: MenuSectionProps) {
-  // 5 Iconic Signature Catches (Matching the 5-Column Sliced Showcase from the Reference Image)
-  const signatureColumns = [
-    {
-      id: 'crab-signature',
-      prefix: 'the legendary',
-      title: 'BLACK PEPPER',
-      subTitle: 'CRAB',
-      price: '44.99',
-      ingredients: 'Live Ceylon Lagoon Mud Crab, Stone-Crushed Black Peppercorns, Dashi Broth, Sweet Wok Garlic, Fresh Scallions.',
-      image: '/images/black-pepper-crab.jpg',
-      bgColor: '#1d333d', // Deep Slate Navy
-      textColor: 'text-white',
-      prefixColor: 'text-stone-300',
-      titleColor: 'text-white',
-      descColor: 'text-stone-300/90',
-      item: MENU_ITEMS.find((i) => i.id === 'crab-signature') || MENU_ITEMS[0]
-    },
-    {
-      id: 'lobster-signature',
-      prefix: 'the imperial',
-      title: 'GARLIC BUTTER',
-      subTitle: 'LAGOON CRAB',
-      price: '44.99',
-      ingredients: 'Colossal Ceylon Mud Crab, Clarified Golden Butter Glaze, Slow-Roasted Island Garlic Cloves, Sea Salt, Lime Leaf.',
-      image: '/images/garlic-butter-crab.jpg',
-      bgColor: '#18847a', // Coastal Teal
-      textColor: 'text-white',
-      prefixColor: 'text-teal-200',
-      titleColor: 'text-white',
-      descColor: 'text-teal-100/90',
-      item: MENU_ITEMS.find((i) => i.id === 'lobster-signature') || MENU_ITEMS[1]
-    },
-    {
-      id: 'crab-ceylon-special-kottu',
-      prefix: 'the iconic',
-      title: 'CEYLON KOTTU',
-      subTitle: 'SPECIAL',
-      price: '39.99',
-      ingredients: 'Hand-Chopped Godamba Roti, Flaked Mud Crab Meat, Jumbo Tiger Shrimp, Spiced Farm Egg, Leeks, Deviled Curry Gravy.',
-      image: '/images/ceylon-kottu.jpg',
-      bgColor: '#e5a942', // Warm Turmeric Amber / Honey Gold
-      textColor: 'text-[#451a03]',
-      prefixColor: 'text-[#78350f]',
-      titleColor: 'text-[#451a03]',
-      descColor: 'text-[#78350f]/90',
-      item: MENU_ITEMS.find((i) => i.id === 'crab-ceylon-special-kottu') || MENU_ITEMS[2]
-    },
-    {
-      id: 'seafood-boil',
-      prefix: 'the colossal',
-      title: 'SEAFOOD BOIL',
-      subTitle: 'FEAST',
-      price: '129.99',
-      ingredients: 'Jumbo Lobster Tail, Whole Blue Crab, Atlantic Scallops, Green Mussels, Tiger Prawns, Sweet Corn, Spiced Baby Potatoes.',
-      image: '/images/seafood-boil.jpg',
-      bgColor: '#e67e45', // Paprika & Roasted Chili Coral
-      textColor: 'text-white',
-      prefixColor: 'text-orange-200',
-      titleColor: 'text-white',
-      descColor: 'text-orange-100/90',
-      item: MENU_ITEMS.find((i) => i.id === 'seafood-boil') || MENU_ITEMS[3]
-    },
-    {
-      id: 'jaffna-crab-curry',
-      prefix: 'the royal',
-      title: 'JAFFNA CRAB',
-      subTitle: 'CURRY',
-      price: '48.99',
-      ingredients: 'Colossal Estuary Mud Crab, 21 Roasted Ceylon Spices, Thick Coconut Milk, Fresh Murunga Leaves, Toasted Red Chili.',
-      image: '/images/jaffna-crab-curry.jpg',
-      bgColor: '#c93b2b', // Signature Ceylon Crimson Red
-      textColor: 'text-white',
-      prefixColor: 'text-red-200',
-      titleColor: 'text-white',
-      descColor: 'text-red-100/90',
-      item: MENU_ITEMS.find((i) => i.id === 'jaffna-crab-curry') || MENU_ITEMS[0],
-      hasSeal: true // Quality Seal Stamp on the 5th column
-    }
-  ];
+  const [activeTab, setActiveTab] = useState('main');
+  const [addedItem, setAddedItem] = useState<string | null>(null);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const plateDiscRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lobsterClawRef = useRef<HTMLDivElement>(null);
+  const dippingDishRef = useRef<HTMLDivElement>(null);
+  const garlicRef = useRef<HTMLDivElement>(null);
+
+  // 3 Signature Plates for the Flat-Lay Showcase (Exact Match to Frames 00:01 - 00:02)
+  const plateDishes = {
+    appetizers: [
+      {
+        id: 'kade-bread',
+        title: 'Woodfired Kade Bread & Butter',
+        desc: 'Traditional Sri Lankan street bread freshly baked in wood-fired hearths. Perfect for dipping in rich chili crab gravy.',
+        price: '12.99',
+        image: '/images/ocean-platter.jpg',
+        item: MENU_ITEMS[0]
+      },
+      {
+        id: 'garlic-butter-crab',
+        title: 'Golden Garlic Butter Prawns',
+        desc: 'Wild jumbo tiger prawns wok-tossed in clarified golden butter glaze, crushed garlic cloves, sea salt, and fresh lime.',
+        price: '28.99',
+        image: '/images/garlic-butter-crab.jpg',
+        hasChopsticks: true, // Center dish with crossed chopsticks
+        item: MENU_ITEMS[1]
+      },
+      {
+        id: 'pittu-combo',
+        title: 'Claypot Steamed Pittu',
+        desc: 'Layered cylinders of roasted rice flour and freshly grated coconut, steamed in bamboo tubes with spicy lunu miris.',
+        price: '16.99',
+        image: '/images/pittu-combo.jpg',
+        hasFork: true, // Right dish with resting fork
+        item: MENU_ITEMS[2]
+      }
+    ],
+    main: [
+      {
+        id: 'garlic-butter-crab-main',
+        title: 'Garlic Butter Mud Crab',
+        desc: 'Colossal Ceylon Mud Crab wok-seared in clarified golden island butter glaze, sweet roasted garlic cloves, and sea salt.',
+        price: '44.99',
+        image: '/images/garlic-butter-crab.jpg',
+        item: MENU_ITEMS.find((i) => i.id === 'lobster-signature') || MENU_ITEMS[1]
+      },
+      {
+        id: 'crab-signature-main',
+        title: 'Imperial Ceylon Chili Crab',
+        desc: 'Wild lagoon mud crab simmered over roaring flames in 21 stone-ground island spices. Dipped with warm woodfired bread.',
+        price: '46.99',
+        image: '/images/hero-crab.jpg',
+        hasChopsticks: true, // Center dish with crossed bamboo chopsticks!
+        item: MENU_ITEMS.find((i) => i.id === 'crab-signature') || MENU_ITEMS[0]
+      },
+      {
+        id: 'black-pepper-crab-main',
+        title: 'Miris Gala Black Pepper Crab',
+        desc: 'Black peppercorns hand-crushed on traditional Colombo granite stone. Deep smoky volcanic heat balancing sweet crab meat.',
+        price: '44.99',
+        image: '/images/black-pepper-crab.jpg',
+        hasFork: true, // Right dish with dining fork resting across rim!
+        item: MENU_ITEMS.find((i) => i.id === 'crab-signature') || MENU_ITEMS[0]
+      }
+    ],
+    dessert: [
+      {
+        id: 'watalappan',
+        title: 'Spiced Coconut Watalappan',
+        desc: 'Steamed coconut custard sweetened with pure Ceylon kithul treacle, ground nutmeg, cardamom, and toasted cashews.',
+        price: '14.99',
+        image: '/images/ocean-platter.jpg',
+        item: MENU_ITEMS[0]
+      },
+      {
+        id: 'kithul-curd',
+        title: 'Artisan Buffalo Curd & Treacle',
+        desc: 'Thick, creamy buffalo curd churned in Ruhuna clay pots, drizzled generously with smoky organic wild fishtail palm jaggery.',
+        price: '13.99',
+        image: '/images/garlic-butter-crab.jpg',
+        hasChopsticks: true,
+        item: MENU_ITEMS[1]
+      },
+      {
+        id: 'passion-ice-tea',
+        title: 'Ceylon Golden Milk & Tea',
+        desc: 'Single-estate Nuwara Eliya black tea brewed with fresh ginger, cinnamon quills, and sweetened condensed milk.',
+        price: '8.99',
+        image: '/images/black-pepper-crab.jpg',
+        hasFork: true,
+        item: MENU_ITEMS[2]
+      }
+    ]
+  };
+
+  const currentDishes = plateDishes[activeTab as keyof typeof plateDishes] || plateDishes.main;
+
+  // ================= SCROLL-TRIGGERED DISH ROTATION & SEAMLESS PAGE ENTRANCE =================
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Plate 1 (Left Plate): Circular Disc rotates clockwise from -48deg to 0deg
+      if (plateDiscRefs.current[0]) {
+        gsap.fromTo(
+          plateDiscRefs.current[0],
+          {
+            rotation: -48,
+            scale: 0.92
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom', // Triggers the instant MenuSection enters viewport from Hero
+              end: 'top 20%',
+              scrub: 1.2
+            },
+            rotation: 0,
+            scale: 1,
+            ease: 'none'
+          }
+        );
+      }
+
+      // 2. Plate 2 (Center Plate - Crossed Chopsticks):
+      // Circular Disc counter-rotates from +54deg to 0deg into prominent center slot
+      if (plateDiscRefs.current[1]) {
+        gsap.fromTo(
+          plateDiscRefs.current[1],
+          {
+            rotation: 54,
+            scale: 0.92
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'top 18%',
+              scrub: 1.3
+            },
+            rotation: 0,
+            scale: 1.05,
+            ease: 'none'
+          }
+        );
+      }
+
+      // 3. Plate 3 (Right Plate - Dining Fork):
+      // Circular Disc rotates clockwise from -42deg to 0deg
+      if (plateDiscRefs.current[2]) {
+        gsap.fromTo(
+          plateDiscRefs.current[2],
+          {
+            rotation: -42,
+            scale: 0.92
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'top 20%',
+              scrub: 1.2
+            },
+            rotation: 0,
+            scale: 1,
+            ease: 'none'
+          }
+        );
+      }
+
+      // 4. Periphery Floating Parallax Ingredients (Frame 00:01 - 00:02 Match)
+      // Cooked Lobster Claw (Top-Right)
+      if (lobsterClawRef.current) {
+        gsap.fromTo(
+          lobsterClawRef.current,
+          {
+            x: 120,
+            y: 100,
+            rotation: 35,
+            opacity: 0.3
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'top 25%',
+              scrub: 1.1
+            },
+            x: 0,
+            y: 0,
+            rotation: 15,
+            opacity: 1,
+            ease: 'power1.out'
+          }
+        );
+      }
+
+      // Small Soy Dipping Dish (Top-Left)
+      if (dippingDishRef.current) {
+        gsap.fromTo(
+          dippingDishRef.current,
+          {
+            x: -90,
+            y: 80,
+            rotation: -30,
+            opacity: 0.3
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'top 25%',
+              scrub: 1.1
+            },
+            x: 0,
+            y: 0,
+            rotation: 0,
+            opacity: 1,
+            ease: 'power1.out'
+          }
+        );
+      }
+
+      // Garlic Bulbs & Chili Flakes (Bottom-Left)
+      if (garlicRef.current) {
+        gsap.fromTo(
+          garlicRef.current,
+          {
+            y: 70,
+            rotation: -12,
+            opacity: 0.4
+          },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              end: 'bottom 20%',
+              scrub: 1.2
+            },
+            y: -30,
+            rotation: 6,
+            opacity: 1,
+            ease: 'none'
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [activeTab]);
+
+  const handleAdd = (item: MenuItem, id: string) => {
+    onQuickAdd(item);
+    setAddedItem(id);
+    setTimeout(() => setAddedItem(null), 1500);
+  };
 
   return (
-    <section id="menu" className="relative w-full bg-[#ffffff] text-[#111827] py-10 sm:py-20 overflow-hidden select-none border-t border-stone-200/80">
+    <section
+      id="menu"
+      ref={sectionRef}
+      className="relative w-full bg-[#faf9f6] text-[#111827] pt-12 pb-24 sm:pt-16 sm:pb-32 overflow-hidden select-none border-b border-stone-200/80"
+    >
 
-      {/* Ambient Lighting & Atmosphere */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#dc2626]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#ef4444]/6 rounded-full blur-[130px] pointer-events-none" />
+      {/* ================= FLOATING PERIPHERY PARALLAX INGREDIENTS (Matches Frames 00:01 - 00:02) ================= */}
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* Top Header: "CRAFTED WITH PURPOSE." in Bold Red */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-[11px] font-bold uppercase tracking-[0.22em] text-[#dc2626] mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" />
-            <span>The Signature Curations</span>
-          </div>
-
-          <h2 className="font-brand text-4xl sm:text-6xl md:text-7xl font-black text-[#dc2626] tracking-wide uppercase leading-tight drop-shadow-xs">
-            CRAFTED WITH PURPOSE.
-          </h2>
-          <p className="mt-4 text-xs sm:text-sm md:text-base text-stone-600 font-manrope font-normal max-w-xl mx-auto leading-relaxed">
-            Simple ingredients. Precise techniques. Bold flavors, beautifully crafted to be remembered.
-          </p>
+      {/* Top-Right: Cooked Wild Red Lobster / Crab Claw (Frame 00:01 Match) */}
+      <div
+        ref={lobsterClawRef}
+        className="absolute top-8 right-2 sm:right-10 z-10 pointer-events-none drop-shadow-[0_15px_30px_rgba(220,38,38,0.25)] will-change-transform"
+      >
+        <div className="w-28 sm:w-44 md:w-56 h-28 sm:h-44 md:h-56 relative rotate-[15deg]">
+          <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            {/* Curved Lobster / Crab Claw */}
+            <path d="M40 120 C30 80 50 30 110 20 C135 15 145 35 130 55 C115 70 95 75 75 85 C65 90 55 105 40 120 Z" fill="#dc2626" />
+            <path d="M110 20 C135 25 145 45 125 65 C105 50 85 45 110 20 Z" fill="#ef4444" />
+            <path d="M60 90 C80 80 110 75 130 55 C120 70 100 85 70 100 Z" fill="#991b1b" />
+            {/* Claw joint segments */}
+            <ellipse cx="45" cy="118" rx="14" ry="10" fill="#b91c1c" transform="rotate(-30 45 118)" />
+            <ellipse cx="32" cy="132" rx="12" ry="8" fill="#991b1b" transform="rotate(-35 32 132)" />
+            {/* Shell highlights */}
+            <path d="M80 40 Q105 35 120 40" stroke="#fca5a5" strokeWidth="2.5" strokeLinecap="round" opacity="0.6" />
+          </svg>
         </div>
+      </div>
 
-        {/* ================= 5-COLUMN SLICED SIGNATURE BANNER (MATCHING REFERENCE IMAGE) ================= */}
-        <div className="w-full rounded-3xl sm:rounded-[36px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-200/60">
+      {/* Top-Left: Small Soy Dipping Dish with Red Chili & Mint (Frame 00:01 Match) */}
+      <div
+        ref={dippingDishRef}
+        className="absolute top-10 left-3 sm:left-12 z-10 pointer-events-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)] will-change-transform"
+      >
+        <div className="w-20 sm:w-28 h-20 sm:h-28 rounded-full p-2 bg-white border border-stone-200 shadow-sm flex items-center justify-center">
+          <div className="w-full h-full rounded-full bg-[#1c1917] relative flex items-center justify-center overflow-hidden shadow-inner">
+            <span className="w-3.5 h-1.5 rounded-full bg-[#dc2626] rotate-[-25deg] shadow-sm" />
+            <span className="w-2 h-2 rounded-full bg-[#22c55e] ml-2" />
+          </div>
+        </div>
+      </div>
 
-          <div className="flex flex-col md:flex-row w-full min-h-[640px] lg:min-h-[700px] overflow-x-auto scrollbar-none snap-x">
+      {/* Bottom-Left: Garlic Bulbs & Chili Flakes (Frame 00:01 Match) */}
+      <div
+        ref={garlicRef}
+        className="absolute bottom-6 left-4 sm:left-14 z-10 pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.08)] will-change-transform"
+      >
+        <div className="w-24 sm:w-32 h-24 sm:h-32 relative">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            {/* Garlic Bulb */}
+            <ellipse cx="50" cy="55" rx="20" ry="18" fill="#fdfcf8" stroke="#e5e5e0" strokeWidth="1.5" />
+            <path d="M50 37 Q50 20 48 15" stroke="#a3a39e" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M42 42 Q35 55 42 70" stroke="#e5e5e0" strokeWidth="1.5" fill="none" />
+            <path d="M58 42 Q65 55 58 70" stroke="#e5e5e0" strokeWidth="1.5" fill="none" />
+            {/* Chili Flakes */}
+            <circle cx="25" cy="75" r="2.5" fill="#dc2626" />
+            <circle cx="32" cy="82" r="2" fill="#b91c1c" />
+            <circle cx="75" cy="70" r="2" fill="#ef4444" />
+            <circle cx="80" cy="78" r="3" fill="#dc2626" />
+          </svg>
+        </div>
+      </div>
 
-            {signatureColumns.map((col, index) => (
-              <div
-                key={col.id}
-                onClick={() => onSelectItem(col.item)}
-                style={{ backgroundColor: col.bgColor }}
-                className={`group relative flex-1 min-w-[280px] md:min-w-0 p-6 sm:p-7 lg:p-8 flex flex-col justify-between cursor-pointer transition-all duration-500 ease-out md:hover:flex-[1.28] snap-center select-none overflow-hidden ${index !== signatureColumns.length - 1 ? 'md:border-r border-black/10' : ''
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+
+        {/* Section Header: Matching Exact Reference Text ("What's on our Plate" + Cursive Subtitle) */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#111827] tracking-tight mb-2">
+            What&apos;s on our Plate
+          </h2>
+          <p className="font-serif italic text-base sm:text-xl text-stone-500 font-light mb-8">
+            Please serve yourself without any hesitate
+          </p>
+
+          {/* Minimalist Filter Tabs (Matching Frame 00:01: Appetizers | Main Dish | Dessert) */}
+          <div className="inline-flex items-center justify-center gap-6 sm:gap-10 border-b border-stone-200 pb-3">
+            {[
+              { id: 'appetizers', label: 'Appetizers' },
+              { id: 'main', label: 'Main Catch' },
+              { id: 'dessert', label: 'Dessert' }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold transition-all cursor-pointer relative py-1 ${activeTab === tab.id
+                  ? 'text-[#dc2626] font-bold'
+                  : 'text-stone-500 hover:text-stone-900'
                   }`}
               >
-                {/* Top Section: Icon & Header Typography (Matching "the / MASTERPIECE" style) */}
-                <div className="relative z-10 text-left">
-                  {/* Category icon / Crab glyph */}
-                  <div className="w-8 h-8 rounded-full bg-white/15 backdrop-blur-xs flex items-center justify-center mb-3">
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-white" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="5" />
-                      <path d="M4 12 C4 8 8 4 12 4 C16 4 20 8 20 12" stroke="currentColor" strokeWidth="2" fill="none" />
-                      <circle cx="8" cy="8" r="1.5" />
-                      <circle cx="16" cy="8" r="1.5" />
-                    </svg>
-                  </div>
+                {tab.label}
+                {activeTab === tab.id && (
+                  <span className="absolute -bottom-3 left-0 right-0 h-[2px] bg-[#dc2626]" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                  {/* Prefix in elegant serif / script lowercase */}
-                  <span className={`font-serif italic text-base sm:text-lg block leading-none mb-1 ${col.prefixColor}`}>
-                    {col.prefix}
-                  </span>
+        {/* ================= 3-PLATE CIRCULAR FLAT-LAY SHOWCASE (Exact Turntable Spinning Transition) ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-start justify-items-center">
+          {currentDishes.map((dish, idx) => (
+            <div
+              key={dish.id}
+              className="flex flex-col items-center text-center max-w-sm w-full group cursor-pointer"
+              onClick={() => onSelectItem(dish.item)}
+            >
+              {/* Plate Container with Upright Order Button */}
+              <div className="relative mb-6">
 
-                  {/* Title in condensed bold uppercase */}
-                  <h3 className={`font-black text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight font-sans leading-[0.95] ${col.titleColor}`}>
-                    {col.title}
-                  </h3>
-                  <h4 className={`font-black text-xl sm:text-2xl lg:text-3xl uppercase tracking-tight font-sans leading-[0.95] mt-0.5 opacity-90 ${col.titleColor}`}>
-                    {col.subTitle}
-                  </h4>
-                </div>
-
-                {/* Center Section: Large Delicious Signature Dish Photo */}
-                <div className="relative my-6 sm:my-8 flex items-center justify-center z-10">
-                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-60 lg:h-60 rounded-full overflow-hidden shadow-[0_20px_45px_rgba(0,0,0,0.35)] border-4 border-white/90 group-hover:scale-105 group-hover:rotate-2 transition-transform duration-500 bg-stone-900 flex-shrink-0">
+                {/* Top-Down Circular Ceramic Plate (ROTATES freely on its center axis like a turntable) */}
+                <div
+                  ref={(el) => { plateDiscRefs.current[idx] = el; }}
+                  className="relative w-64 sm:w-72 md:w-80 h-64 sm:h-72 md:h-80 rounded-full p-3 sm:p-4 bg-white border border-stone-200/90 shadow-[0_20px_45px_rgba(0,0,0,0.08)] group-hover:shadow-[0_25px_55px_rgba(220,38,38,0.22)] group-hover:scale-105 transition-shadow duration-500 flex items-center justify-center will-change-transform"
+                >
+                  {/* Food Image Circle */}
+                  <div className="relative w-full h-full rounded-full overflow-hidden shadow-inner bg-stone-900">
                     <Image
-                      src={col.image}
-                      alt={col.title}
+                      src={dish.image}
+                      alt={dish.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 240px, 280px"
+                      className="object-cover object-center filter contrast-[1.05] group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-black/10 group-hover:opacity-0 transition-opacity" />
-                  </div>
-                </div>
-
-                {/* Bottom Section: Gourmet Ingredients & Bold Price */}
-                <div className="relative z-10 text-left pt-2">
-
-                  {/* Ingredients breakdown */}
-                  <p className={`text-xs sm:text-[13px] leading-relaxed font-manrope font-medium line-clamp-4 max-w-[240px] ${col.descColor}`}>
-                    {col.ingredients}
-                  </p>
-
-                  {/* Price Row */}
-                  <div className="flex items-center justify-between mt-4">
-                    <span className={`text-2xl sm:text-3xl font-black font-mono tracking-tight ${col.textColor}`}>
-                      ${col.price}
-                    </span>
-
-                    {/* Quick Add Pill Button on Hover */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onQuickAdd(col.item);
-                      }}
-                      className="opacity-0 group-hover:opacity-100 px-3.5 py-1.5 rounded-full bg-white text-[#111827] hover:bg-[#dc2626] hover:text-white transition-all duration-300 text-xs font-bold font-manrope flex items-center gap-1 shadow-lg hover:scale-105 cursor-pointer"
-                    >
-                      <Plus className="w-3.5 h-3.5 stroke-[3]" />
-                      <span>Order</span>
-                    </button>
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                   </div>
 
-                  {/* Vintage Quality Seal Stamp on Column 5 (Matches the Seal in Reference Image) */}
-                  {col.hasSeal && (
-                    <div className="absolute -bottom-2 right-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-dashed border-white/60 flex flex-col items-center justify-center p-1 text-center rotate-[-12deg] pointer-events-none opacity-85">
-                      <span className="text-[7px] font-mono tracking-widest uppercase font-bold text-white">CEYLON</span>
-                      <span className="text-[9px] font-black uppercase font-sans text-white">WILD</span>
-                      <span className="text-[7px] font-mono tracking-widest uppercase text-white/90">CATCH</span>
+                  {/* ================= CENTER DISH CROSSED CHOPSTICKS (Frame 00:01 Center Match - Spins with Plate) ================= */}
+                  {dish.hasChopsticks && (
+                    <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                      <div className="w-[120%] h-10 relative rotate-[-25deg] drop-shadow-[0_8px_14px_rgba(0,0,0,0.35)]">
+                        {/* Chopstick 1 */}
+                        <div className="absolute top-1 left-0 right-0 h-2.5 rounded-full bg-gradient-to-r from-[#e0c092] via-[#caa268] to-[#eed6b4] border border-[#a87f4c]/40" />
+                        {/* Chopstick 2 (Crossed) */}
+                        <div className="absolute top-4 left-1 right-[-8px] h-2.5 rounded-full bg-gradient-to-r from-[#eed6b4] via-[#caa268] to-[#e0c092] rotate-[7deg] border border-[#a87f4c]/40" />
+                      </div>
                     </div>
                   )}
 
+                  {/* ================= RIGHT DISH RESTING FORK (Frame 00:01 & 00:02 Right Match - Spins with Plate) ================= */}
+                  {dish.hasFork && (
+                    <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                      <div className="w-[110%] h-10 relative rotate-[-38deg] drop-shadow-[0_8px_14px_rgba(0,0,0,0.3)]">
+                        {/* Wooden Handle */}
+                        <div className="absolute top-3 left-4 w-28 h-3 rounded-full bg-gradient-to-r from-[#78350f] via-[#92400e] to-[#b45309] border border-[#451a03]/50" />
+                        {/* Steel Fork Head */}
+                        <div className="absolute top-1.5 left-32 w-16 h-6 flex items-center gap-1">
+                          <span className="w-1 h-5 bg-gradient-to-b from-[#e5e7eb] to-[#9ca3af] rounded-full" />
+                          <span className="w-1 h-6 bg-gradient-to-b from-[#f3f4f6] to-[#9ca3af] rounded-full" />
+                          <span className="w-1 h-6 bg-gradient-to-b from-[#f3f4f6] to-[#9ca3af] rounded-full" />
+                          <span className="w-1 h-5 bg-gradient-to-b from-[#e5e7eb] to-[#9ca3af] rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
+                {/* Floating Quick Add Pill Button (Stays level & upright at bottom-right) */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAdd(dish.item, dish.id);
+                  }}
+                  aria-label={`Add ${dish.title} to cart`}
+                  className={`absolute -bottom-2 right-4 z-20 px-4 py-2 rounded-full font-manrope font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer flex items-center gap-1.5 ${addedItem === dish.id
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-[#dc2626] hover:bg-[#b91c1c] text-white hover:scale-105'
+                    }`}
+                >
+                  {addedItem === dish.id ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      <span>Added</span>
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-3.5 h-3.5 stroke-[3]" />
+                      <span>Order</span>
+                    </>
+                  )}
+                </button>
               </div>
-            ))}
 
-          </div>
+              {/* Dish Typography (Stays upright, clean Didone & Manrope typography) */}
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#111827] group-hover:text-[#dc2626] transition-colors mb-2">
+                {dish.title}
+              </h3>
 
+              <p className="font-manrope text-xs sm:text-sm text-stone-500 font-normal leading-relaxed max-w-xs mb-3">
+                {dish.desc}
+              </p>
+
+              <span className="font-mono text-base font-extrabold text-[#111827]">
+                ${dish.price}
+              </span>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom Call to Action: Bold Red Pill Button with Radiating Dashes ("VIEW FULL MENU") */}
-        <div className="mt-16 sm:mt-24 flex flex-col items-center justify-center">
-
-          <div className="relative inline-flex items-center justify-center">
-
-            {/* Hand-Drawn Red Accent Dashes Around the Button */}
-            <svg
-              className="absolute -inset-x-8 -inset-y-6 w-[calc(100%+64px)] h-[calc(100%+48px)] pointer-events-none text-[#dc2626]"
-              viewBox="0 0 280 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Left hand dashes */}
-              <line x1="20" y1="40" x2="35" y2="45" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-              <line x1="16" y1="52" x2="32" y2="52" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-              <line x1="22" y1="64" x2="36" y2="59" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-
-              {/* Right hand dashes */}
-              <line x1="245" y1="45" x2="260" y2="40" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-              <line x1="248" y1="52" x2="264" y2="52" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-              <line x1="244" y1="59" x2="258" y2="64" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" />
-
-              {/* Top and Bottom mini accents */}
-              <line x1="130" y1="14" x2="136" y2="22" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="144" y1="12" x2="144" y2="20" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="158" y1="14" x2="152" y2="22" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" />
-            </svg>
-
-            {/* The Bold Red Pill Button */}
-            <Link
-              href="/menu"
-              className="relative z-10 px-8 sm:px-12 py-3.5 sm:py-4 rounded-full bg-[#dc2626] hover:bg-[#b91c1c] active:scale-95 text-white font-black text-xs sm:text-sm uppercase tracking-[0.22em] font-brand transition-all duration-300 shadow-[0_10px_30px_rgba(220,38,38,0.4)] hover:shadow-[0_15px_40px_rgba(220,38,38,0.55)] hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer border border-[#ef4444]"
-            >
-              <span>VIEW FULL MENU</span>
-              <ArrowRight className="w-4 h-4 text-white stroke-[2.5]" />
-            </Link>
-
-          </div>
-
-          <p className="mt-4 text-[11px] font-manrope uppercase tracking-[0.25em] text-stone-500 font-semibold text-center">
-            Over 30 Coastal Seafood Curations • Kottu Roti • Rosé Pastas • Desserts
-          </p>
-
+        {/* Explore Full Menu Link Pill */}
+        <div className="mt-16 text-center">
+          <Link
+            href="/menu"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-stone-900 hover:bg-[#dc2626] text-white font-manrope font-extrabold text-xs uppercase tracking-[0.22em] transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>Explore Complete 20+ Catch Menu</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
       </div>

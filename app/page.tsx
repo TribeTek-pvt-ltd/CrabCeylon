@@ -13,6 +13,7 @@ import HeritageStory from './components/HeritageStory';
 import FoundersSection from './components/FoundersSection';
 import ReservationModal from './components/ReservationModal';
 import Testimonials from './components/Testimonials';
+import NewsletterSection from './components/NewsletterSection';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ParallaxFoodAtmosphere from './components/ParallaxFoodAtmosphere';
@@ -106,6 +107,9 @@ export default function Home() {
 
         {/* Acclaimed Testimonials */}
         <Testimonials />
+
+        {/* Newsletter & Catch Club Updates (Matches Frame 00:06) */}
+        <NewsletterSection />
 
         {/* Guest Inquiries & FAQ */}
         <FAQ />
