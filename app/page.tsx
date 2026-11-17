@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import MenuSection from './components/MenuSection';
 import ItemCustomizerModal from './components/ItemCustomizerModal';
 import CartDrawer from './components/CartDrawer';
 import OrderTrackerModal from './components/OrderTrackerModal';
@@ -71,7 +70,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#ffffff] text-[#111827] selection:bg-[#dc2626] selection:text-white relative">
       {/* Dynamic Parallax Scroll Atmosphere (Floating Lobster, Spices, Chilies & Herbs from Video) */}
-      <ParallaxFoodAtmosphere />
+      {/* <ParallaxFoodAtmosphere /> */}
 
       {/* Top Fixed Navbar */}
       <Navbar
@@ -84,19 +83,15 @@ export default function Home() {
       />
 
       <main className="flex-1">
-        {/* Clean Luxury Hero Section */}
+        {/* Clean Luxury Hero Section with 3 Signature Food Plates */}
         <Hero
+          onSelectItem={(item) => setCustomizingItem(item)}
+          onQuickAdd={handleQuickAdd}
           onOrderClick={() => {
             const el = document.getElementById('menu');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
           onReserveClick={() => setIsReservationOpen(true)}
-        />
-
-        {/* The Catch Signature Section (Custom Crafted with Purpose Layout) */}
-        <MenuSection
-          onSelectItem={(item) => setCustomizingItem(item)}
-          onQuickAdd={handleQuickAdd}
         />
 
         {/* Heritage & Origin Story */}

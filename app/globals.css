@@ -48,6 +48,14 @@ h3,
   font-family: 'Playfair Display', 'Bodoni Moda', Georgia, serif;
 }
 
+.font-cormorant {
+  font-family: 'Cormorant', 'Playfair Display', Georgia, serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+}
+
 .font-brand {
   font-family: 'Cinzel', serif;
 }

@@ -68,49 +68,49 @@ export default function Navbar({
       <header
         className={`fixed left-0 right-0 z-40 transition-all duration-300 ${isScrolled
           ? 'bg-white/95 backdrop-blur-md border-b border-red-600/15 shadow-[0_4px_20px_rgba(0,0,0,0.06)] py-5'
-          : 'bg-white/85 backdrop-blur-md border-b border-stone-200/70 shadow-xs py-5'
+          : 'bg-black/35 backdrop-blur-md border-b border-white/10 shadow-xs py-5'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between">
             {/* Left Nav Links */}
-            <nav className="hidden lg:flex items-center gap-6 text-[11px] uppercase tracking-[0.22em] font-medium transition-colors text-stone-700">
+            <nav className={`hidden lg:flex items-center gap-6 text-[11px] uppercase tracking-[0.22em] font-medium transition-colors ${isScrolled ? 'text-stone-700' : 'text-stone-200'}`}>
               <Link
                 href="/#menu"
-                className="transition-colors py-0.5 relative group hover:text-[#dc2626]"
+                className={`transition-colors py-0.5 relative group ${isScrolled ? 'hover:text-[#dc2626]' : 'hover:text-white'}`}
               >
                 The Catch
                 <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#dc2626] transition-all duration-300 group-hover:w-full" />
               </Link>
               <Link
                 href="/menu"
-                className="transition-colors py-0.5 relative group font-semibold text-[#dc2626] hover:text-[#b91c1c]"
+                className={`transition-colors py-0.5 relative group font-semibold ${isScrolled ? 'text-[#dc2626] hover:text-[#b91c1c]' : 'text-red-400 hover:text-white'}`}
               >
                 Full Menu
                 <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#dc2626] transition-all duration-300 group-hover:w-full" />
               </Link>
               <Link
                 href="/#heritage"
-                className="transition-colors py-0.5 relative group hover:text-[#dc2626]"
+                className={`transition-colors py-0.5 relative group ${isScrolled ? 'hover:text-[#dc2626]' : 'hover:text-white'}`}
               >
                 Our Heritage
                 <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#dc2626] transition-all duration-300 group-hover:w-full" />
               </Link>
               <Link
                 href="/#ministers"
-                className="transition-colors py-0.5 relative group hover:text-[#dc2626]"
+                className={`transition-colors py-0.5 relative group ${isScrolled ? 'hover:text-[#dc2626]' : 'hover:text-white'}`}
               >
-                The Ministers
+                Our Founders
                 <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#dc2626] transition-all duration-300 group-hover:w-full" />
               </Link>
             </nav>
 
             {/* Center Brand Identity with Didone Luxury Wordmark */}
             <Link href="/" className="flex flex-col items-center text-center group py-0.5">
-              <span className="font-didone text-xl sm:text-2xl font-extrabold tracking-[0.2em] leading-tight transition-colors text-[#111827] group-hover:text-[#dc2626]">
+              <span className={`font-didone text-xl sm:text-2xl font-extrabold tracking-[0.2em] leading-tight transition-colors ${isScrolled ? 'text-[#111827] group-hover:text-[#dc2626]' : 'text-white group-hover:text-red-400'}`}>
                 CRAB CEYLON
               </span>
-              <span className="text-[8px] uppercase tracking-[0.4em] font-semibold leading-tight transition-colors text-[#dc2626]">
+              <span className={`text-[8px] uppercase tracking-[0.4em] font-semibold leading-tight transition-colors ${isScrolled ? 'text-[#dc2626]' : 'text-red-400'}`}>
                 Yorkville • Toronto
               </span>
             </Link>
@@ -120,7 +120,7 @@ export default function Navbar({
               {/* Track Order Button */}
               <button
                 onClick={onOpenOrderSearch}
-                className="hidden sm:flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] transition-colors cursor-pointer py-0.5 font-medium text-stone-700 hover:text-[#dc2626]"
+                className={`hidden sm:flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] transition-colors cursor-pointer py-0.5 font-medium ${isScrolled ? 'text-stone-700 hover:text-[#dc2626]' : 'text-stone-200 hover:text-white'}`}
               >
                 <Compass className="w-3.5 h-3.5 text-[#dc2626]" />
                 <span>Track Order</span>
@@ -139,7 +139,11 @@ export default function Navbar({
               <button
                 onClick={onOpenCart}
                 id="cart-button"
-                className="flex items-center gap-2 px-3 py-1.5 bg-[#111827] hover:bg-[#1f2937] text-white transition-all cursor-pointer group shadow-sm hover:shadow-md border border-white/10 rounded-full"
+                className={`flex items-center gap-2 px-3 py-1.5 transition-all cursor-pointer group shadow-sm hover:shadow-md rounded-full ${
+                  isScrolled
+                    ? 'bg-[#111827] hover:bg-[#1f2937] text-white border border-stone-200/20'
+                    : 'bg-black/60 hover:bg-black/80 text-white border border-white/20'
+                }`}
               >
                 <ShoppingBag className="w-3.5 h-3.5 text-[#ef4444] group-hover:scale-110 transition-transform" />
                 <span className="text-[10px] uppercase tracking-[0.16em] font-medium hidden sm:inline text-white">
@@ -153,7 +157,7 @@ export default function Navbar({
               {/* Mobile Menu Hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-1.5 transition-colors text-stone-800 hover:text-[#dc2626]"
+                className={`lg:hidden p-1.5 transition-colors ${isScrolled ? 'text-stone-800 hover:text-[#dc2626]' : 'text-white hover:text-red-400'}`}
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -203,7 +207,7 @@ export default function Navbar({
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-[#dc2626] py-1"
               >
-                The Ministers (Founders)
+                Our Founders & Philosophy
               </Link>
               <button
                 onClick={() => {
